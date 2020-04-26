@@ -30,56 +30,47 @@ class _RequestTabState extends State<RequestTab> {
   @override
   Widget build(BuildContext context) {
     uidg = widget.uid;
-    return Column(
-      children: <Widget>[
-        StreamBuilder<QuerySnapshot>(
-          stream: _firestore
-              .collection('requests')
-              .orderBy('date', descending: true)
-              .snapshots(),
-          builder: (context, snapshot) {
-            snapa = snapshot;
-            if (snapshot.data == null) {
-              return Expanded(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Center(
-                            child: Icon(Icons.error),
-                          ),
-                          Text("No Requests found!"),
-                        ],
-                      );
-                    }),
-              );
-            } else {
-              docs = snapshot.data.documents;
-              //docs_data = snapshot.data[];
+    return StreamBuilder<QuerySnapshot>(
+      stream: _firestore
+          .collection('requests')
+          .orderBy('date', descending: true)
+          .snapshots(),
+      builder: (context, snapshot) {
+        snapa = snapshot;
+        if (snapshot.data == null) {
+          return ListView.builder(
+              shrinkWrap: true,
+              itemCount: 1,
+              itemBuilder: (context, index) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Center(
+                      child: Icon(Icons.error),
+                    ),
+                    Text("No Requests found!"),
+                  ],
+                );
+              });
+        } else {
+          docs = snapshot.data.documents;
+          //docs_data = snapshot.data[];
 
-              /*List<Widget> requests = docs.map((doc) {
-          Requests(doc.data['latitude'], doc.data['longitude'], doc.data['img'],
-              doc.data['date']);
-        }).toList();*/
-              return Container(
-                //height: 500,
-                child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: getItems(context, docs).length,
-                    itemBuilder: (context, index) {
-                      // String img = snapshot.data.hitsList[index].previewUrl;
-                      return getItems(context, docs)[index];
-                    }),
-              );
-            }
-          },
-        ),
-      ],
+          /*List<Widget> requests = docs.map((doc) {
+      Requests(doc.data['latitude'], doc.data['longitude'], doc.data['img'],
+          doc.data['date']);
+    }).toList();*/
+          return ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: getItems(context, docs).length,
+              itemBuilder: (context, index) {
+                // String img = snapshot.data.hitsList[index].previewUrl;
+                return getItems(context, docs)[index];
+              });
+        }
+      },
     );
   }
 }

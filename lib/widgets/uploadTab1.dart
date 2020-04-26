@@ -333,8 +333,8 @@ class _UploadTabState extends State<UploadTab> {
                             .snapshots(),
                         builder: (context, snapshot) {
                           print(uid);
-                          if (snapshot.hasData == null &&
-                              snapshot.data != null) {
+                          if (snapshot.hasData==false||
+                              snapshot.data == null) {
                             return CircularProgressIndicator();
                           } else {
                             List<DocumentSnapshot> docs =
