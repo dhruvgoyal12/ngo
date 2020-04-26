@@ -116,7 +116,7 @@ class _UploadTabState extends State<UploadTab> {
             ? widget.initialLongitude
             : _pickedLocation.longitude,
         'date': DateTime.now().toIso8601String().toString(),
-        'time':DateTime.now(),
+        'time':DateTime.now().toString(),
         'img': 'Images/' +
             widget.uid.toString() +
             '/' +
