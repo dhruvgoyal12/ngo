@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:ngouser/widgets/RequestTab.dart';
 import 'package:ngouser/widgets/takePicture.dart';
 
 import 'Constants.dart';
@@ -20,6 +21,7 @@ import 'homepage.dart';
 
 class UploadTab extends StatefulWidget {
   bool bottom;
+  var email;
   var land_test = '';
   bool food = false,
       clothes = false,
@@ -36,7 +38,7 @@ class UploadTab extends StatefulWidget {
   var location;
   var img;
   final cam;
-  var phone,username;
+  var phone, username;
   UploadTab(
       this.img,
       this.initialPage,
@@ -53,7 +55,8 @@ class UploadTab extends StatefulWidget {
       this.children,
       this.bottom,
       this.phone,
-      this.username);
+      this.username,
+      this.email);
 
   bool isSelecting = false;
   @override
@@ -61,7 +64,7 @@ class UploadTab extends StatefulWidget {
 }
 
 class _UploadTabState extends State<UploadTab> {
-  bool showSpinner =false;
+  bool showSpinner = false;
   String address;
   Completer<GoogleMapController> _controller = Completer();
   double zoom;
@@ -72,7 +75,7 @@ class _UploadTabState extends State<UploadTab> {
   TextEditingController _landmark = new TextEditingController();
   //_landmark.text=widget.landmark;
   TextEditingController _instructions = new TextEditingController();
-  TextEditingController _address=new TextEditingController();
+  TextEditingController _address = new TextEditingController();
   LatLng selectedLocation;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore _firestore = Firestore.instance;
@@ -80,12 +83,17 @@ class _UploadTabState extends State<UploadTab> {
   LatLng _pickedLocation;
   Future<void> _upload(var instructions, bool food, bool clothes, bool medicine,
       bool women, bool children) async {
-        var category;
-        if(food==true)category='Food';
-        else if(women==true)category='Women Care';
-        else if(clothes==true)category='Clothes';
-        else if(medicine==true)category='Medicine';
-        else category='Children Care';
+    var category;
+    if (food == true)
+      category = 'Food';
+    else if (women == true)
+      category = 'Women Care';
+    else if (clothes == true)
+      category = 'Clothes';
+    else if (medicine == true)
+      category = 'Medicine';
+    else
+      category = 'Children Care';
     var filename =
         'Images/' + widget.uid + '/' + DateTime.now().toIso8601String();
     final StorageReference firebaseStorageRef =
@@ -93,22 +101,20 @@ class _UploadTabState extends State<UploadTab> {
     final StorageUploadTask task = firebaseStorageRef.putFile(File(widget.img));
     var dowurl = await (await task.onComplete).ref.getDownloadURL();
     String url = dowurl.toString();
-    print(_pickedLocation == null
-        ? widget.initialLatitude
-        : _pickedLocation.latitude);
-    print(_pickedLocation == null
-        ? widget.initialLongitude
-        : _pickedLocation.longitude);
-    print(DateTime.now().toIso8601String().toString());
-    print(_instructions.text.toString());
-    print(_landmark.text.toString());
+    String city = _landmark.text.toString();
+    //city.replaceFirst(',', '-');
+    // city.replaceFirst(',', '-');
+    //city.replaceFirst(',', ':');
+    city = city.substring(city.indexOf(',') + 1, city.lastIndexOf(','));
+    city = city.substring(city.indexOf(',') + 1, city.lastIndexOf(','));
+    print(city);
     await _firestore.collection('requests').add(
       {
         //'location': widget.location.toString(),
-        'submitter_phone_no':'9910907009',
-        'city':'Jaipur',
-        'submitted_by':widget.username,
-        'category':category,
+        'submitter_phone_no': widget.phone,
+        'city': city,
+        'submitted_by': widget.username,
+        'category': category,
         'latitude': _pickedLocation == null
             ? widget.initialLatitude
             : _pickedLocation.latitude,
@@ -116,20 +122,24 @@ class _UploadTabState extends State<UploadTab> {
             ? widget.initialLongitude
             : _pickedLocation.longitude,
         'date': DateTime.now().toIso8601String().toString(),
-        'time':DateTime.now().toString(),
+        'time': DateTime.now().toString(),
         'img': 'Images/' +
             widget.uid.toString() +
             '/' +
             DateTime.now().toIso8601String(),
         'user_id': widget.uid,
         'address': _landmark.text.toString(),
-        'landmark':_address.text.toString(),
+        'landmark': _address.text.toString(),
         'note': _instructions.text.toString(),
         'status': 'Pending',
         'img_url': url,
         'coordinate': _pickedLocation == null
-            ? widget.initialLatitude.toString()+','+widget.initialLongitude.toString()
-           : (_pickedLocation.longitude.toString()+','+_pickedLocation.longitude.toString()),
+            ? widget.initialLatitude.toString() +
+                ',' +
+                widget.initialLongitude.toString()
+            : (_pickedLocation.longitude.toString() +
+                ',' +
+                _pickedLocation.longitude.toString()),
         //'address': _landmark,
         'Food': food,
         'Clothes': clothes,
@@ -271,8 +281,9 @@ class _UploadTabState extends State<UploadTab> {
         toastLength: Toast.LENGTH_SHORT);
   }
 
-  void _settingModalBottomSheet(
-      context, instructions, upload, food, clothes, medicine, women, children,_address) {
+  void _settingModalBottomSheet(context, instructions, upload, food, clothes,
+      medicine, women, children, _address, uid) {
+    String uid;
     showModalBottomSheet(
       isDismissible: true,
       backgroundColor: Colors.grey,
@@ -297,6 +308,14 @@ class _UploadTabState extends State<UploadTab> {
           ),
           body: StatefulBuilder(
             builder: (BuildContext context, StateSetter st) {
+               FirebaseAuth.instance.currentUser().then((val) {
+     
+        uid = val.uid;
+     
+    }).catchError((e) {
+      print(e);
+    });
+
               return Container(
                 decoration: BoxDecoration(
                     //  border: Border.all(width: 5),
@@ -306,6 +325,53 @@ class _UploadTabState extends State<UploadTab> {
                 height: (MediaQuery.of(context).size.height / 2),
                 child: Column(
                   children: <Widget>[
+                    Container(
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: _firestore
+                            .collection(uid)
+                            .orderBy('date', descending: true)
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          print(uid);
+                          if (snapshot.hasData == null &&
+                              snapshot.data != null) {
+                            return CircularProgressIndicator();
+                          } else {
+                            List<DocumentSnapshot> docs =
+                                snapshot.data.documents;
+                            //print(docs[0].data['username']);
+                            if (docs != null) {
+                              if (docs[0]
+                                  .data['username']
+                                  .toString()
+                                  .isNotEmpty) {
+                                widget.username = docs[0].data['username'];
+                              } else {
+                                widget.username = 'user';
+                              }
+                              if (docs[0]
+                                  .data['username']
+                                  .toString()
+                                  .isNotEmpty) {
+                                widget.email = docs[0].data['email'];
+                              } else {
+                                widget.email = 'null';
+                              }
+                              if (docs[0].data['phone'].toString().isNotEmpty) {
+                                widget.phone = docs[0].data['phone'];
+                              } else {
+                                widget.phone = 'null';
+                              }
+                              return Text('');
+                            } else {
+                              return Text('');
+                            }
+
+                            // return Text('');
+                          }
+                        },
+                      ),
+                    ),
                     TextField(
                       enabled: true,
                       //maxLines: 3,
@@ -352,7 +418,9 @@ class _UploadTabState extends State<UploadTab> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 15,),
+                    SizedBox(
+                      height: 15,
+                    ),
                     TextField(
                       enabled: true,
                       //maxLines: 3,
@@ -414,9 +482,16 @@ class _UploadTabState extends State<UploadTab> {
                             color: Colors.white,
                           )),
                       onPressed: () {
-                        upload(instructions, food, clothes, medicine, women,
-                            children);
-                        Navigator.popAndPushNamed(context, '/homepage');
+                        if (_instructions.text.toString().isNotEmpty) {
+                          upload(instructions, food, clothes, medicine, women,
+                              children);
+                          Navigator.popAndPushNamed(context, '/homepage');
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: 'Please enter instructions',
+                              gravity: ToastGravity.TOP,
+                              toastLength: Toast.LENGTH_SHORT);
+                        }
                         //setup();
 
                         // Navigator.of(context).pop(context);
@@ -476,8 +551,8 @@ class _UploadTabState extends State<UploadTab> {
       ],
     );
     return ModalProgressHUD(
-           inAsyncCall: showSpinner,
-          child: Scaffold(
+      inAsyncCall: showSpinner,
+      child: Scaffold(
         resizeToAvoidBottomInset: false,
         resizeToAvoidBottomPadding: false,
         body: SingleChildScrollView(
@@ -560,7 +635,8 @@ class _UploadTabState extends State<UploadTab> {
                                     // padding: EdgeInsets.all(10),
                                     height:
                                         MediaQuery.of(context).size.height * 2,
-                                    width: MediaQuery.of(context).size.width * 2,
+                                    width:
+                                        MediaQuery.of(context).size.width * 2,
                                     child: SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       controller: horizontal,
@@ -568,30 +644,34 @@ class _UploadTabState extends State<UploadTab> {
                                         controller: vertical,
                                         child: Container(
                                           padding: EdgeInsets.all(10),
-                                          height:
-                                              MediaQuery.of(context).size.height *
-                                                  2,
-                                          width:
-                                              MediaQuery.of(context).size.height *
-                                                  2,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              2,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              2,
                                           child: GoogleMap(
                                             // myLocationButtonEnabled: true,
                                             minMaxZoomPreference:
                                                 MinMaxZoomPreference.unbounded,
                                             zoomGesturesEnabled: true,
                                             onMapCreated: _onMapCreated,
-                                            initialCameraPosition: CameraPosition(
-                                                zoom: 16,
-                                                target: LatLng(
-                                                  widget.initialLatitude,
-                                                  widget.initialLongitude,
-                                                )),
+                                            initialCameraPosition:
+                                                CameraPosition(
+                                                    zoom: 16,
+                                                    target: LatLng(
+                                                      widget.initialLatitude,
+                                                      widget.initialLongitude,
+                                                    )),
                                             onTap:
                                                 dif_loc ? selectLocation : null,
                                             markers: _pickedLocation == null
                                                 ? {
                                                     Marker(
-                                                        markerId: MarkerId('m1'),
+                                                        markerId:
+                                                            MarkerId('m1'),
                                                         position: LatLng(
                                                             widget
                                                                 .initialLatitude,
@@ -760,8 +840,8 @@ class _UploadTabState extends State<UploadTab> {
                                 strokeWidth: 1,
                                 child: Container(
                                     //margin: EdgeInsets.all(3),
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.36,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.36,
                                     height:
                                         MediaQuery.of(context).size.height / 3,
                                     child: widget.img == null
@@ -833,9 +913,10 @@ class _UploadTabState extends State<UploadTab> {
                                         ),
                                         SizedBox(height: 5),
                                         Container(
-                                          width:
-                                              MediaQuery.of(context).size.width *
-                                                  0.38,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.38,
                                           child: CheckboxListTile(
                                             value: widget.food,
                                             title: Text('Food',
@@ -861,9 +942,10 @@ class _UploadTabState extends State<UploadTab> {
                                           ),
                                         ),
                                         Container(
-                                          width:
-                                              MediaQuery.of(context).size.width *
-                                                  0.38,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.38,
                                           child: CheckboxListTile(
                                             value: widget.medicine,
                                             title: Text('Medicine',
@@ -887,9 +969,10 @@ class _UploadTabState extends State<UploadTab> {
                                           ),
                                         ),
                                         Container(
-                                          width:
-                                              MediaQuery.of(context).size.width *
-                                                  0.38,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.38,
                                           child: CheckboxListTile(
                                             value: widget.women,
                                             title: Column(
@@ -926,9 +1009,10 @@ class _UploadTabState extends State<UploadTab> {
                                           ),
                                         ),
                                         Container(
-                                          width:
-                                              MediaQuery.of(context).size.width *
-                                                  0.38,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.38,
                                           child: CheckboxListTile(
                                             value: widget.clothes,
                                             title: Text('Clothes',
@@ -951,9 +1035,10 @@ class _UploadTabState extends State<UploadTab> {
                                           ),
                                         ),
                                         Container(
-                                          width:
-                                              MediaQuery.of(context).size.width *
-                                                  0.38,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.38,
                                           child: CheckboxListTile(
                                             value: widget.children,
                                             title: Column(
@@ -1052,7 +1137,8 @@ class _UploadTabState extends State<UploadTab> {
                               ? Text('Image selected')
                               : Text('Image Pending...'),
                               */
-                          SizedBox(width: MediaQuery.of(context).size.width / 30),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width / 30),
                           Text('Image',
                               style: TextStyle(
                                 fontFamily: 'Lato',
@@ -1069,7 +1155,8 @@ class _UploadTabState extends State<UploadTab> {
                                 fontFamily: 'Lato',
                                 fontSize: 12,
                               )),
-                          SizedBox(width: MediaQuery.of(context).size.width / 5),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width / 5),
                           /*widget.food == false &&
                                   widget.medicine == false &&
                                   widget.women == false &&
@@ -1197,25 +1284,25 @@ class _UploadTabState extends State<UploadTab> {
                                             widget.medicine,
                                             widget.children,
                                             widget.bottom)));
-                                             _settingModalBottomSheet(
-                                  context,
-                                  _instructions,
-                                  _upload,
-                                  widget.food,
-                                  widget.clothes,
-                                  widget.medicine,
-                                  widget.women,
-                                  widget.children,
-                                  _address);
+                                _settingModalBottomSheet(
+                                    context,
+                                    _instructions,
+                                    _upload,
+                                    widget.food,
+                                    widget.clothes,
+                                    widget.medicine,
+                                    widget.women,
+                                    widget.children,
+                                    _address,
+                                    widget.uid);
                               } else {
                                 Fluttertoast.showToast(
-                                    msg: "Please select all the required details",
+                                    msg:
+                                        "Please select all the required details",
                                     gravity: ToastGravity.TOP,
                                     toastLength: Toast.LENGTH_SHORT);
                               }
                               //setup();
-
-                             
                             },
                           ),
                         ],

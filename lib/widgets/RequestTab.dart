@@ -30,44 +30,52 @@ class _RequestTabState extends State<RequestTab> {
   @override
   Widget build(BuildContext context) {
     uidg = widget.uid;
-    return StreamBuilder<QuerySnapshot>(
-      stream: _firestore
-          .collection('requests')
-          .orderBy('date', descending: true)
-          .snapshots(),
-      builder: (context, snapshot) {
-        snapa = snapshot;
-        if (snapshot.data == null) {
-          return ListView.builder(
-              itemCount: 1,
-              itemBuilder: (context, index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Center(
-                      child: Icon(Icons.error),
-                    ),
-                    Text("No Requests found!"),
-                  ],
-                );
-              });
-        } else {
-          docs = snapshot.data.documents;
-          //docs_data = snapshot.data[];
+    return Column(
+      children: <Widget>[
+        StreamBuilder<QuerySnapshot>(
+          stream: _firestore
+              .collection('requests')
+              .orderBy('date', descending: true)
+              .snapshots(),
+          builder: (context, snapshot) {
+            snapa = snapshot;
+            if (snapshot.data == null) {
+              return ListView.builder(
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Center(
+                          child: Icon(Icons.error),
+                        ),
+                        Text("No Requests found!"),
+                      ],
+                    );
+                  });
+            } else {
+              docs = snapshot.data.documents;
+              //docs_data = snapshot.data[];
 
-          /*List<Widget> requests = docs.map((doc) {
+              /*List<Widget> requests = docs.map((doc) {
           Requests(doc.data['latitude'], doc.data['longitude'], doc.data['img'],
               doc.data['date']);
         }).toList();*/
-          return ListView.builder(
-              itemCount: getItems(context, docs).length,
-              itemBuilder: (context, index) {
-                // String img = snapshot.data.hitsList[index].previewUrl;
-                return getItems(context, docs)[index];
-              });
-        }
-      },
+              return Container(
+                //height: 500,
+                child: ListView.builder(
+                    itemCount: getItems(context, docs).length,
+                    itemBuilder: (context, index) {
+                      // String img = snapshot.data.hitsList[index].previewUrl;
+                      return getItems(context, docs)[index];
+                    }),
+              );
+            }
+          },
+        ),
+       
+      ],
     );
   }
 }
@@ -110,120 +118,104 @@ List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
     img = doc.data['img_url'].toString();
     //address = doc.data['address'].toString();
     return me
-        ? GestureDetector(
-            onLongPress: () {
-              _settingModalBottomSheet(
-                context,
-                doc,
-                img,
-                date,
-                landmark,
-                instructions,
-                status,
-                food,
-                medicine,
-                women,
-                clothes,
-                children,
-              );
-            },
-            child: Card(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(5),
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(img),
-                      backgroundColor: Colors.transparent,
-                    ),
+        ? Expanded(
+                  child: Card(
+            margin: EdgeInsets.all(10),
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage(img),
+                    backgroundColor: Colors.transparent,
                   ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 3,
-                        ),
-                        FittedBox(
-                          child: Text(
-                            "Date :   " + date.substring(0, date.indexOf('T')),
-                            style: TextStyle(
-                              fontFamily: 'Lato',
-                              fontSize: 15,
-                            ),
+                ),
+                SizedBox(
+                  width: 4,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 3,
+                      ),
+                      FittedBox(
+                        child: Text(
+                          "Date :   " + date.substring(0, date.indexOf('T')),
+                          style: TextStyle(
+                            fontFamily: 'Lato',
+                            fontSize: 15,
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      /*FittedBox(
+                        child: Text(
+                          "Instructions:" + instructions,
+                          style: TextStyle(fontFamily: 'Lato', fontSize: 15),
                         ),
-                        /*FittedBox(
-                          child: Text(
-                            "Instructions:" + instructions,
-                            style: TextStyle(fontFamily: 'Lato', fontSize: 15),
+                      ),*/
+                      FittedBox(
+                        child: Text(
+                          "Location : " +
+                              address.substring(0, address.indexOf(',')),
+                          style: TextStyle(
+                            fontFamily: 'Lato',
+                            fontSize: 14,
                           ),
-                        ),*/
-                        FittedBox(
-                          child: Text(
-                            "Location : " +
-                                address.substring(0, address.indexOf(',')),
-                            style: TextStyle(
-                              fontFamily: 'Lato',
-                              fontSize: 14,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Card(
-                                color: Colors.red,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(7.0),
-                                  child: Text(
-                                    "PENDING",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      //fontWeight: FontWeight.bold,
-                                    ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Card(
+                              color: Colors.red,
+                              child: Padding(
+                                padding: const EdgeInsets.all(7.0),
+                                child: Text(
+                                  "PENDING",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    //fontWeight: FontWeight.bold,
                                   ),
-                                )),
-                            IconButton(
-                              icon: Icon(Icons.more_vert),
-                              onPressed: () {
-                                _settingModalBottomSheet(
-                                  context,
-                                  doc,
-                                  img,
-                                  date,
-                                  address,
-                                  instructions,
-                                  status,
-                                  food,
-                                  medicine,
-                                  women,
-                                  clothes,
-                                  children,
-                                );
-                              },
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                                ),
+                              )),
+                          IconButton(
+                            icon: Icon(Icons.more_vert),
+                            onPressed: () {
+                              _settingModalBottomSheet(
+                                context,
+                                doc,
+                                img,
+                                date,
+                                address,
+                                instructions,
+                                status,
+                                food,
+                                medicine,
+                                women,
+                                clothes,
+                                children,
+                              );
+                            },
+                          )
+                        ],
+                      )
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          )
+          ),
+        )
         : Container();
   }).toList();
 }
@@ -426,14 +418,16 @@ void _settingModalBottomSheet(
                     textAlign: TextAlign.center,
                   ),
                   Container(
-                    margin:EdgeInsets.all(20) ,
-                    child: Text(instructions.isNotEmpty ? instructions : '--',
-                        style: TextStyle(
-                          fontFamily: 'Lato',
-                          fontSize: 13,
-                          // fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,),
+                    margin: EdgeInsets.all(20),
+                    child: Text(
+                      instructions.isNotEmpty ? instructions : '--',
+                      style: TextStyle(
+                        fontFamily: 'Lato',
+                        fontSize: 13,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),

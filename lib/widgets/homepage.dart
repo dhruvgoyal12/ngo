@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ngouser/widgets/RequestTab.dart';
+import 'package:ngouser/widgets/accepted_requests.dart';
 import 'package:ngouser/widgets/profile.dart';
 import 'package:ngouser/widgets/uploadTab.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,7 +14,7 @@ class homepage extends StatefulWidget {
   var uid, initialLatitude, initialLongitude, landmark, pickedLocation;
   final cam;
   final bool food, clothes, women, medicine, children;
-  String username = 'user', email='null', phone;
+  String username = 'user', email = 'null', phone;
   homepage(
       this.img,
       this.initialPage,
@@ -43,7 +44,7 @@ class _homepageState extends State<homepage>
 
   @override
   void initState() {
-    _tabController = new TabController(vsync: this, length: 2);
+    _tabController = new TabController(vsync: this, length: 3);
     if (widget.initialPage != null) _tabController.animateTo(1);
     this.uid = '';
     FirebaseAuth.instance.currentUser().then((val) {
@@ -79,7 +80,7 @@ class _homepageState extends State<homepage>
           children: <Widget>[
             Container(
               //color: Colors.grey,
-              height:  MediaQuery.of(context).size.height,
+              height: MediaQuery.of(context).size.height,
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 child: Column(
@@ -125,8 +126,7 @@ class _homepageState extends State<homepage>
                                       .data['username']
                                       .toString()
                                       .isNotEmpty) {
-                                    widget.email =
-                                        docs[0].data['email'] ;
+                                    widget.email = docs[0].data['email'];
                                   } else {
                                     widget.email = 'null';
                                   }
@@ -134,12 +134,10 @@ class _homepageState extends State<homepage>
                                       .data['phone']
                                       .toString()
                                       .isNotEmpty) {
-                                    widget.phone =
-                                        docs[0].data['phone'] ;
+                                    widget.phone = docs[0].data['phone'];
                                   } else {
                                     widget.phone = 'null';
                                   }
-                                  
 
                                   return Text(
                                     'Hello, ' + widget.username,
@@ -157,7 +155,7 @@ class _homepageState extends State<homepage>
                       ),
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height/2,
+                      height: MediaQuery.of(context).size.height / 2,
                       child: ListView(children: <Widget>[
                         SizedBox(
                           height: 15,
@@ -178,7 +176,7 @@ class _homepageState extends State<homepage>
                                 context,
                                 PageTransition(
                                   child: ProfilePage(widget.username,
-                                      widget.email, widget.phone,widget.cam),
+                                      widget.email, widget.phone, widget.cam),
                                   type: PageTransitionType.downToUp,
                                 ));
                           },
@@ -276,13 +274,20 @@ class _homepageState extends State<homepage>
                 padding: EdgeInsets.only(top: 5),
                 height: 60.0,
                 child: Tab(
-                  text: 'EXISTING',
+                  text: 'Pending Requests',
                   icon: Icon(Icons.home),
                 )),
             Container(
                 padding: EdgeInsets.only(top: 5),
                 height: 60.0,
                 child: Tab(text: 'NEW', icon: Icon(Icons.add))),
+            Container(
+                padding: EdgeInsets.only(top: 5),
+                height: 60.0,
+                child: Tab(
+                  text: 'Accepted Requests',
+                  icon: Icon(Icons.home),
+                )),
           ],
         ),
         centerTitle: true,
@@ -303,6 +308,7 @@ class _homepageState extends State<homepage>
           //HomeTab(this.uid),
           //SizedBox(child: CircularProgressIndicator(),height:30 ,width: 30,),
           //HomeTab(this.uid),
+
           RequestTab(this.uid),
           UploadTab(
               widget.img,
@@ -320,7 +326,9 @@ class _homepageState extends State<homepage>
               widget.children,
               widget.bottom,
               widget.phone,
-              widget.username),
+              widget.username,
+              widget.email),
+          RequestTab1(this.uid),
         ],
       ),
     );
