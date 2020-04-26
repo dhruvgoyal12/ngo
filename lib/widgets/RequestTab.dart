@@ -40,20 +40,23 @@ class _RequestTabState extends State<RequestTab> {
           builder: (context, snapshot) {
             snapa = snapshot;
             if (snapshot.data == null) {
-              return ListView.builder(
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Center(
-                          child: Icon(Icons.error),
-                        ),
-                        Text("No Requests found!"),
-                      ],
-                    );
-                  });
+              return Expanded(
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Center(
+                            child: Icon(Icons.error),
+                          ),
+                          Text("No Requests found!"),
+                        ],
+                      );
+                    }),
+              );
             } else {
               docs = snapshot.data.documents;
               //docs_data = snapshot.data[];
@@ -65,6 +68,8 @@ class _RequestTabState extends State<RequestTab> {
               return Container(
                 //height: 500,
                 child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
                     itemCount: getItems(context, docs).length,
                     itemBuilder: (context, index) {
                       // String img = snapshot.data.hitsList[index].previewUrl;
@@ -74,7 +79,6 @@ class _RequestTabState extends State<RequestTab> {
             }
           },
         ),
-       
       ],
     );
   }
@@ -118,8 +122,7 @@ List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
     img = doc.data['img_url'].toString();
     //address = doc.data['address'].toString();
     return me
-        ? Expanded(
-                  child: Card(
+        ? Card(
             margin: EdgeInsets.all(10),
             child: Row(
               children: <Widget>[
@@ -154,11 +157,11 @@ List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
                         height: 10,
                       ),
                       /*FittedBox(
-                        child: Text(
-                          "Instructions:" + instructions,
-                          style: TextStyle(fontFamily: 'Lato', fontSize: 15),
-                        ),
-                      ),*/
+                      child: Text(
+                        "Instructions:" + instructions,
+                        style: TextStyle(fontFamily: 'Lato', fontSize: 15),
+                      ),
+                    ),*/
                       FittedBox(
                         child: Text(
                           "Location : " +
@@ -214,8 +217,7 @@ List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
                 ),
               ],
             ),
-          ),
-        )
+          )
         : Container();
   }).toList();
 }

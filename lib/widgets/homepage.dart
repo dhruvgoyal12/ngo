@@ -274,7 +274,7 @@ class _homepageState extends State<homepage>
                 padding: EdgeInsets.only(top: 5),
                 height: 60.0,
                 child: Tab(
-                  text: 'Pending Requests',
+                  text: 'Pending ',
                   icon: Icon(Icons.home),
                 )),
             Container(
@@ -285,7 +285,7 @@ class _homepageState extends State<homepage>
                 padding: EdgeInsets.only(top: 5),
                 height: 60.0,
                 child: Tab(
-                  text: 'Accepted Requests',
+                  text: 'Acceptedb',
                   icon: Icon(Icons.home),
                 )),
           ],
@@ -309,7 +309,7 @@ class _homepageState extends State<homepage>
           //SizedBox(child: CircularProgressIndicator(),height:30 ,width: 30,),
           //HomeTab(this.uid),
 
-          RequestTab(this.uid),
+          Container(height:600,child: RequestTab(this.uid)),
           UploadTab(
               widget.img,
               widget.initialPage,

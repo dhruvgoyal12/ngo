@@ -41,6 +41,8 @@ class _RequestTab1State extends State<RequestTab1> {
         snapa = snapshot;
         if (snapshot.data == null) {
           return ListView.builder(
+            shrinkWrap: true,
+            scrollDirection:Axis.vertical,
               itemCount: 1,
               itemBuilder: (context, index) {
                 return Column(
@@ -62,12 +64,16 @@ class _RequestTab1State extends State<RequestTab1> {
       Requests(doc.data['latitude'], doc.data['longitude'], doc.data['img'],
           doc.data['date']);
     }).toList();*/
-          return ListView.builder(
-              itemCount: getItems(context, docs).length,
-              itemBuilder: (context, index) {
-                // String img = snapshot.data.hitsList[index].previewUrl;
-                return getItems(context, docs)[index];
-              });
+          return Expanded(
+                      child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+                itemCount: getItems(context, docs).length,
+                itemBuilder: (context, index) {
+                  // String img = snapshot.data.hitsList[index].previewUrl;
+                  return getItems(context, docs)[index];
+                }),
+          );
         }
       },
     ),
