@@ -319,7 +319,8 @@ class _homepageState extends State<homepage>
               widget.medicine,
               widget.children,
               widget.bottom,
-              widget.phone),
+              widget.phone,
+              widget.username),
         ],
       ),
     );

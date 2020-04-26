@@ -36,7 +36,7 @@ class UploadTab extends StatefulWidget {
   var location;
   var img;
   final cam;
-  var phone;
+  var phone,username;
   UploadTab(
       this.img,
       this.initialPage,
@@ -52,7 +52,8 @@ class UploadTab extends StatefulWidget {
       this.medicine,
       this.children,
       this.bottom,
-      this.phone);
+      this.phone,
+      this.username);
 
   bool isSelecting = false;
   @override
@@ -104,7 +105,9 @@ class _UploadTabState extends State<UploadTab> {
     await _firestore.collection('requests').add(
       {
         //'location': widget.location.toString(),
-        'submitter_phone_no':widget.phone,
+        'submitter_phone_no':'9910907009',
+        'city':'Jaipur',
+        'submitted_by':widget.username,
         'category':category,
         'latitude': _pickedLocation == null
             ? widget.initialLatitude
@@ -113,6 +116,7 @@ class _UploadTabState extends State<UploadTab> {
             ? widget.initialLongitude
             : _pickedLocation.longitude,
         'date': DateTime.now().toIso8601String().toString(),
+        'time':DateTime.now(),
         'img': 'Images/' +
             widget.uid.toString() +
             '/' +
