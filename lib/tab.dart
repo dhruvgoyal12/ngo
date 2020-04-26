@@ -193,6 +193,12 @@ class tab extends StatelessWidget {
                           .collection('requests_accepted')
                           .getDocuments();
                       for (var us in req.documents) {
+                        bool food=false,women=false,children=false,medicine=false,clothes=false;
+                        if(us.data['category']=='Food'){food=true;}
+                        if(us.data['category']=='Women'){women=true;}
+                        if(us.data['category']=='Children'){children=true;}
+                        if(us.data['category']=='Clothes'){clothes=true;}
+                        if(us.data['category']=='Medicine'){medicine=true;}
                         if (loggedinUser.email == us.data['accepted_by']) {
                           _firestore.collection('requests').add({
                             'img_url': us.data['img_url'],
@@ -203,6 +209,15 @@ class tab extends StatelessWidget {
                             'submitted_by': us.data['submitted_by'],
                             'submitter_phone_no': us.data['submitter_phone_no'],
                             'category': us.data['category'],
+                            'date':DateTime.now().toIso8601String(),
+                            'Food':food,
+                            'Women Care':women,
+                            'Children Care':children,
+                            "Clothes":clothes,
+                            'Medicine':medicine,
+                            'status':'Approved',
+                            'user_id':us.data['user_id'],
+
                           });
                           us.reference.delete();
                         }

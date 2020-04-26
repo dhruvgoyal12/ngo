@@ -34,7 +34,7 @@ class _RequestTab1State extends State<RequestTab1> {
         children: <Widget>[
     StreamBuilder<QuerySnapshot>(
       stream: _firestore
-          .collection('requests_accepted')
+          .collection('requests_added')
           .orderBy('date', descending: true)
           .snapshots(),
       builder: (context, snapshot) {

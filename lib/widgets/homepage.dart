@@ -285,7 +285,7 @@ class _homepageState extends State<homepage>
                 padding: EdgeInsets.only(top: 5),
                 height: 60.0,
                 child: Tab(
-                  text: 'Acceptedb',
+                  text: 'Accepted',
                   icon: Icon(Icons.home),
                 )),
           ],
