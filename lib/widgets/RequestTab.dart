@@ -356,7 +356,7 @@ void _settingModalBottomSheet(
                               child: Padding(
                                 padding: const EdgeInsets.all(7.0),
                                 child: Text(
-                                  status,
+                                  "PENDING",
                                   style: TextStyle(
                                     fontSize: 14,
                                     //fontWeight: FontWeight.bold,

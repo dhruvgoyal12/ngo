@@ -31,59 +31,56 @@ class _RequestTab1State extends State<RequestTab1> {
   Widget build(BuildContext context) {
     uidg = widget.uid;
     return Column(
-        children: <Widget>[
-    StreamBuilder<QuerySnapshot>(
-      stream: _firestore
-          .collection('requests_added')
-          .orderBy('date', descending: true)
-          .snapshots(),
-      builder: (context, snapshot) {
-        snapa = snapshot;
-        if (snapshot.data == null) {
-          return ListView.builder(
-            shrinkWrap: true,
-            scrollDirection:Axis.vertical,
-              itemCount: 1,
-              itemBuilder: (context, index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Center(
-                      child: Icon(Icons.error),
-                    ),
-                    Text("No Requests found!"),
-                  ],
-                );
-              });
-        } else {
-          docs = snapshot.data.documents;
-          //docs_data = snapshot.data[];
+      children: <Widget>[
+        StreamBuilder<QuerySnapshot>(
+          stream: _firestore
+              .collection('requests_added')
+              .orderBy('date', descending: true)
+              .snapshots(),
+          builder: (context, snapshot) {
+            snapa = snapshot;
+            if (snapshot.data == null) {
+              return ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Center(
+                          child: Icon(Icons.error),
+                        ),
+                        Text("No Requests found!"),
+                      ],
+                    );
+                  });
+            } else {
+              docs = snapshot.data.documents;
+              //docs_data = snapshot.data[];
 
-          /*List<Widget> requests = docs.map((doc) {
+              /*List<Widget> requests = docs.map((doc) {
       Requests(doc.data['latitude'], doc.data['longitude'], doc.data['img'],
           doc.data['date']);
     }).toList();*/
-          return Expanded(
-                      child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-                itemCount: getItems(context, docs).length,
-                itemBuilder: (context, index) {
-                  // String img = snapshot.data.hitsList[index].previewUrl;
-                  return getItems(context, docs)[index];
-                }),
-          );
-        }
-      },
-    ),
-         
-        ],
-      );
+              return Expanded(
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: getItems(context, docs).length,
+                    itemBuilder: (context, index) {
+                      // String img = snapshot.data.hitsList[index].previewUrl;
+                      return getItems(context, docs)[index];
+                    }),
+              );
+            }
+          },
+        ),
+      ],
+    );
   }
 }
-
-
 
 List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
   // int i = -1;
@@ -190,7 +187,7 @@ List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Card(
-                                color: Colors.red,
+                                color: Colors.green,
                                 child: Padding(
                                   padding: const EdgeInsets.all(7.0),
                                   child: Text(
@@ -313,41 +310,6 @@ void _settingModalBottomSheet(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Container(
-                              margin: EdgeInsets.only(bottom: 50),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                  size: 40,
-                                ),
-                                onPressed: () async {
-                                  // StorageReference photoRef = await FirebaseStorage.getReferenceFromUrl(url);
-                                  StorageReference photoRef =
-                                      await FirebaseStorage.instance
-                                          .getReferenceFromUrl(url);
-                                  photoRef.delete().catchError((e) {});
-                                  _firestore
-                                      .collection('requests')
-                                      .document(doc.documentID.toString())
-                                      .delete()
-                                      .then((_) {
-                                    Fluttertoast.showToast(
-                                      msg: 'Request deleted',
-                                      gravity: ToastGravity.TOP,
-                                      toastLength: Toast.LENGTH_SHORT,
-                                    );
-                                    Navigator.popAndPushNamed(
-                                        context, '/homepage');
-                                  }).catchError((e) {
-                                    Fluttertoast.showToast(
-                                      msg: 'Error deleting request',
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.TOP,
-                                    );
-                                  });
-                                },
-                              )),
-                          Container(
                             margin: EdgeInsets.only(right: 10),
                             child: Text(
                               date.substring(0, date.indexOf('T')),
@@ -363,11 +325,11 @@ void _settingModalBottomSheet(
                           Card(
                               margin: EdgeInsets.all(5),
                               //shape: ShapeBorder.lerp(),
-                              color: Colors.red,
+                              color: Colors.green,
                               child: Padding(
                                 padding: const EdgeInsets.all(7.0),
                                 child: Text(
-                                  status,
+                                  "ACCEPTED",
                                   style: TextStyle(
                                     fontSize: 14,
                                     //fontWeight: FontWeight.bold,
