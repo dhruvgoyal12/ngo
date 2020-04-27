@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ngouser/widgets/db_helper.dart';
 
 import 'forgot.dart';
 import 'login.dart';
@@ -14,10 +15,32 @@ import 'package:page_transition/page_transition.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
-class tab extends StatelessWidget {
+class tab extends StatefulWidget {
   tab({this.loggedinUser});
   final loggedinUser;
+
+  @override
+  _tabState createState() => _tabState();
+}
+Future<void> updateC() async {
+    await DBHelper.insert('status',{'id':'c','value':2});
+
+
+  }
+  Future<void> updateC1() async {
+    await DBHelper.insert('status',{'id':'c','value':3});
+
+
+  }
+class _tabState extends State<tab> {
+  @override
+  void initState() {
+    updateC();
+    // TODO: implement initState
+    super.initState();
+  }
   final _auth = FirebaseAuth.instance;
+
   final _firestore = Firestore.instance;
 
   @override
@@ -56,7 +79,7 @@ class tab extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          loggedinUser.email,
+                          widget.loggedinUser.email,
                           style: TextStyle(
                               fontSize: 16,
                               letterSpacing: 0.6,
@@ -116,11 +139,11 @@ class tab extends StatelessWidget {
 //                    final loggedinUser = await _auth.currentUser();
 
                       final exist = await _auth
-                          .fetchSignInMethodsForEmail(email: loggedinUser.email)
+                          .fetchSignInMethodsForEmail(email: widget.loggedinUser.email)
                           .toString();
                       if (exist != null) {
                         await _auth.sendPasswordResetEmail(
-                            email: loggedinUser.email);
+                            email: widget.loggedinUser.email);
                         var alertDialog = AlertUser(
                           title: 'Success!',
                           content: 'Please check your email',
@@ -163,6 +186,7 @@ class tab extends StatelessWidget {
                     ],
                   ),
                   onTap: () async {
+                    updateC1();
                     await _auth.signOut();
                     Navigator.pushReplacement(
                         context,
@@ -188,12 +212,14 @@ class tab extends StatelessWidget {
                     ],
                   ),
                   onTap: () async {
+
                     try {
+                      updateC1();
                       QuerySnapshot req = await _firestore
                           .collection('requests_accepted')
                           .getDocuments();
                       for (var us in req.documents) {
-                        if (loggedinUser.email == us.data['accepted_by']) {
+                        if (widget.loggedinUser.email == us.data['accepted_by']) {
                           _firestore.collection('requests').add({
                             'img_url': us.data['img_url'],
                             'city': us.data['city'],
@@ -212,7 +238,7 @@ class tab extends StatelessWidget {
                           .collection('categories')
                           .where('sender',
                               isEqualTo:
-                                  loggedinUser.email.toString().toLowerCase())
+                                  widget.loggedinUser.email.toString().toLowerCase())
                           .limit(1)
                           .getDocuments();
                       final List<DocumentSnapshot> documents = result.documents;
@@ -228,7 +254,7 @@ class tab extends StatelessWidget {
                           .document(id)
                           .delete();
 
-                      await loggedinUser.delete();
+                      await widget.loggedinUser.delete();
 
                       Navigator.pushReplacement(
                           context,

@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 1.5.69
 # min_api: 21
-# pg_map_id: fd0852d
+# pg_map_id: c7916b6
 androidx.arch.core.executor.ArchTaskExecutor -> a.a.a.a.a:
     androidx.arch.core.executor.ArchTaskExecutor sInstance -> c
     androidx.arch.core.executor.TaskExecutor mDefaultTaskExecutor -> b
@@ -20563,6 +20563,223 @@ com.squareup.okhttp.internal.http.StatusLine -> b.c.a.g.a.a:
     int code -> b
     java.lang.String message -> c
     com.squareup.okhttp.internal.http.StatusLine parse(java.lang.String) -> a
+com.tekartik.sqflite.Database -> b.d.a.a:
+    android.database.sqlite.SQLiteDatabase sqliteDatabase -> e
+    boolean inTransaction -> f
+    int logLevel -> d
+    boolean singleInstance -> a
+    java.lang.String path -> b
+    int id -> c
+    void close() -> a
+    void deleteDatabase(java.lang.String) -> a
+    android.database.sqlite.SQLiteDatabase getReadableDatabase() -> b
+    java.lang.String getThreadLogPrefix() -> c
+    java.lang.String getThreadLogTag() -> d
+    android.database.sqlite.SQLiteDatabase getWritableDatabase() -> e
+    void open() -> f
+    void openReadOnly() -> g
+com.tekartik.sqflite.Database$1 -> b.d.a.a$a:
+com.tekartik.sqflite.LogLevel -> b.d.a.b:
+    java.lang.Integer getLogLevel(io.flutter.plugin.common.MethodCall) -> a
+    boolean hasSqlLevel(int) -> a
+    boolean hasVerboseLevel(int) -> b
+com.tekartik.sqflite.SqflitePlugin -> b.d.a.c:
+    android.content.Context context -> a
+    java.lang.Object openCloseLocker -> h
+    java.lang.String databasesPath -> i
+    android.os.HandlerThread handlerThread -> k
+    int databaseId -> j
+    java.util.Map databaseMap -> m
+    java.lang.Object databaseMapLocker -> g
+    int logLevel -> f
+    int THREAD_PRIORITY -> e
+    java.util.Map _singleInstancesByPath -> c
+    android.os.Handler handler -> l
+    boolean QUERY_AS_MAP_LIST -> d
+    io.flutter.plugin.common.MethodChannel methodChannel -> b
+    boolean access$100(com.tekartik.sqflite.SqflitePlugin,com.tekartik.sqflite.Database,com.tekartik.sqflite.operation.Operation) -> a
+    int access$1000() -> a
+    com.tekartik.sqflite.Database access$500(com.tekartik.sqflite.SqflitePlugin,com.tekartik.sqflite.Database,io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> a
+    void access$700(com.tekartik.sqflite.SqflitePlugin,java.lang.Exception,com.tekartik.sqflite.operation.Operation,com.tekartik.sqflite.Database) -> a
+    void access$900(com.tekartik.sqflite.SqflitePlugin,com.tekartik.sqflite.Database) -> a
+    void closeDatabase(com.tekartik.sqflite.Database) -> a
+    java.util.List cursorRowToList(android.database.Cursor,int) -> a
+    java.util.Map cursorRowToMap(android.database.Cursor) -> a
+    boolean execute(com.tekartik.sqflite.Database,com.tekartik.sqflite.operation.Operation) -> a
+    com.tekartik.sqflite.Database executeOrError(com.tekartik.sqflite.Database,io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> a
+    java.util.Map fixMap(java.util.Map) -> a
+    com.tekartik.sqflite.Database getDatabase(int) -> a
+    com.tekartik.sqflite.SqlCommand getSqlCommand(io.flutter.plugin.common.MethodCall) -> a
+    void handleException(java.lang.Exception,com.tekartik.sqflite.operation.Operation,com.tekartik.sqflite.Database) -> a
+    boolean isInMemoryPath(java.lang.String) -> a
+    java.util.Map makeOpenResult(int,boolean,boolean) -> a
+    void onAttachedToEngine(android.content.Context,io.flutter.plugin.common.BinaryMessenger) -> a
+    void onAttachedToEngine(io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding) -> a
+    void onMethodCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> a
+    java.lang.String toString(java.lang.Object) -> a
+    boolean access$200(com.tekartik.sqflite.SqflitePlugin,com.tekartik.sqflite.Database,com.tekartik.sqflite.operation.Operation) -> b
+    java.lang.Object access$600() -> b
+    java.lang.Object cursorValue(android.database.Cursor,int) -> b
+    boolean executeOrError(com.tekartik.sqflite.Database,com.tekartik.sqflite.operation.Operation) -> b
+    void onDetachedFromEngine(io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding) -> b
+    void onGetDatabasesPathCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> b
+    boolean access$300(com.tekartik.sqflite.SqflitePlugin,com.tekartik.sqflite.Database,com.tekartik.sqflite.operation.Operation) -> c
+    java.lang.Object access$800() -> c
+    boolean insert(com.tekartik.sqflite.Database,com.tekartik.sqflite.operation.Operation) -> c
+    void onOptionsCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> c
+    boolean access$400(com.tekartik.sqflite.SqflitePlugin,com.tekartik.sqflite.Database,com.tekartik.sqflite.operation.Operation) -> d
+    com.tekartik.sqflite.Database getDatabaseOrError(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> d
+    boolean query(com.tekartik.sqflite.Database,com.tekartik.sqflite.operation.Operation) -> d
+    void onBatchCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> e
+    boolean update(com.tekartik.sqflite.Database,com.tekartik.sqflite.operation.Operation) -> e
+    void onCloseDatabaseCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> f
+    void onDebugCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> g
+    void onDebugModeCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> h
+    void onDeleteDatabaseCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> i
+    void onExecuteCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> j
+    void onInsertCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> k
+    void onOpenDatabaseCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> l
+    void onQueryCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> m
+    void onUpdateCall(io.flutter.plugin.common.MethodCall,io.flutter.plugin.common.MethodChannel$Result) -> n
+com.tekartik.sqflite.SqflitePlugin$1 -> b.d.a.c$a:
+    io.flutter.plugin.common.MethodCall val$call -> a
+    com.tekartik.sqflite.SqflitePlugin$BgResult val$bgResult -> b
+    com.tekartik.sqflite.Database val$database -> c
+    com.tekartik.sqflite.SqflitePlugin this$0 -> d
+com.tekartik.sqflite.SqflitePlugin$2 -> b.d.a.c$b:
+    io.flutter.plugin.common.MethodCall val$call -> a
+    com.tekartik.sqflite.SqflitePlugin$BgResult val$bgResult -> b
+    com.tekartik.sqflite.Database val$database -> c
+    com.tekartik.sqflite.SqflitePlugin this$0 -> d
+com.tekartik.sqflite.SqflitePlugin$3 -> b.d.a.c$c:
+    io.flutter.plugin.common.MethodCall val$call -> a
+    com.tekartik.sqflite.SqflitePlugin$BgResult val$bgResult -> b
+    com.tekartik.sqflite.Database val$database -> c
+    com.tekartik.sqflite.SqflitePlugin this$0 -> d
+com.tekartik.sqflite.SqflitePlugin$4 -> b.d.a.c$d:
+    com.tekartik.sqflite.SqflitePlugin$BgResult val$bgResult -> c
+    com.tekartik.sqflite.Database val$database -> a
+    com.tekartik.sqflite.SqflitePlugin this$0 -> d
+    io.flutter.plugin.common.MethodCall val$call -> b
+com.tekartik.sqflite.SqflitePlugin$5 -> b.d.a.c$e:
+    io.flutter.plugin.common.MethodCall val$call -> a
+    com.tekartik.sqflite.SqflitePlugin$BgResult val$bgResult -> b
+    com.tekartik.sqflite.Database val$database -> c
+    com.tekartik.sqflite.SqflitePlugin this$0 -> d
+com.tekartik.sqflite.SqflitePlugin$6 -> b.d.a.c$f:
+    com.tekartik.sqflite.SqflitePlugin$BgResult val$bgResult -> c
+    com.tekartik.sqflite.Database val$database -> e
+    int val$databaseId -> h
+    com.tekartik.sqflite.SqflitePlugin this$0 -> i
+    boolean val$singleInstance -> g
+    io.flutter.plugin.common.MethodCall val$call -> f
+    boolean val$inMemory -> a
+    java.lang.String val$path -> b
+    java.lang.Boolean val$readOnly -> d
+com.tekartik.sqflite.SqflitePlugin$7 -> b.d.a.c$g:
+    com.tekartik.sqflite.SqflitePlugin this$0 -> c
+    com.tekartik.sqflite.SqflitePlugin$BgResult val$bgResult -> b
+    com.tekartik.sqflite.Database val$database -> a
+com.tekartik.sqflite.SqflitePlugin$8 -> b.d.a.c$h:
+    com.tekartik.sqflite.SqflitePlugin$BgResult val$bgResult -> c
+    com.tekartik.sqflite.Database val$openedDatabase -> a
+    java.lang.String val$path -> b
+    com.tekartik.sqflite.SqflitePlugin this$0 -> d
+com.tekartik.sqflite.SqflitePlugin$BgResult -> b.d.a.c$i:
+    android.os.Handler handler -> a
+    io.flutter.plugin.common.MethodChannel$Result result -> b
+    io.flutter.plugin.common.MethodChannel$Result access$1100(com.tekartik.sqflite.SqflitePlugin$BgResult) -> a
+    void error(java.lang.String,java.lang.String,java.lang.Object) -> a
+    void notImplemented() -> a
+    void success(java.lang.Object) -> a
+com.tekartik.sqflite.SqflitePlugin$BgResult$1 -> b.d.a.c$i$a:
+    com.tekartik.sqflite.SqflitePlugin$BgResult this$1 -> b
+    java.lang.Object val$results -> a
+com.tekartik.sqflite.SqflitePlugin$BgResult$2 -> b.d.a.c$i$b:
+    java.lang.Object val$data -> c
+    java.lang.String val$errorCode -> a
+    java.lang.String val$errorMessage -> b
+    com.tekartik.sqflite.SqflitePlugin$BgResult this$1 -> d
+com.tekartik.sqflite.SqflitePlugin$BgResult$3 -> b.d.a.c$i$c:
+    com.tekartik.sqflite.SqflitePlugin$BgResult this$1 -> a
+com.tekartik.sqflite.SqlCommand -> b.d.a.d:
+    java.util.List rawArguments -> b
+    java.lang.String sql -> a
+    java.util.Map fixMap(java.util.Map) -> a
+    java.lang.String[] getQuerySqlArguments() -> a
+    java.lang.String[] getQuerySqlArguments(java.util.List) -> a
+    java.lang.String toString(java.lang.Object) -> a
+    java.util.List getRawSqlArguments() -> b
+    java.lang.Object[] getSqlArguments(java.util.List) -> b
+    java.lang.Object toValue(java.lang.Object) -> b
+    java.lang.String getSql() -> c
+    java.util.List getStringQuerySqlArguments(java.util.List) -> c
+    java.lang.Object[] getSqlArguments() -> d
+    com.tekartik.sqflite.SqlCommand sanitizeForQuery() -> e
+com.tekartik.sqflite.dev.Debug -> b.d.a.e.a:
+    boolean LOGV -> a
+    boolean _EXTRA_LOGV -> b
+    boolean EXTRA_LOGV -> c
+com.tekartik.sqflite.operation.BaseOperation -> b.d.a.f.a:
+    void error(java.lang.String,java.lang.String,java.lang.Object) -> a
+    void success(java.lang.Object) -> a
+    com.tekartik.sqflite.operation.OperationResult getOperationResult() -> e
+com.tekartik.sqflite.operation.BaseReadOperation -> b.d.a.f.b:
+    com.tekartik.sqflite.SqlCommand getSqlCommand() -> a
+    java.lang.Boolean getBoolean(java.lang.String) -> b
+    boolean getNoResult() -> b
+    java.lang.Boolean getInTransaction() -> c
+    boolean getContinueOnError() -> d
+    java.lang.String getSql() -> e
+    java.util.List getSqlArguments() -> f
+com.tekartik.sqflite.operation.BatchOperation -> b.d.a.f.c:
+    java.util.Map map -> a
+    com.tekartik.sqflite.operation.BatchOperation$BatchOperationResult operationResult -> b
+    boolean noResult -> c
+    java.lang.Object getArgument(java.lang.String) -> a
+    void handleError(io.flutter.plugin.common.MethodChannel$Result) -> a
+    void handleErrorContinue(java.util.List) -> a
+    boolean getNoResult() -> b
+    void handleSuccess(java.util.List) -> b
+    com.tekartik.sqflite.operation.OperationResult getOperationResult() -> e
+    java.lang.String getMethod() -> f
+    java.util.Map getOperationError() -> g
+    java.util.Map getOperationSuccessResult() -> h
+com.tekartik.sqflite.operation.BatchOperation$BatchOperationResult -> b.d.a.f.c$a:
+    java.lang.Object errorData -> d
+    java.lang.Object result -> a
+    java.lang.String errorMessage -> c
+    java.lang.String errorCode -> b
+    void error(java.lang.String,java.lang.String,java.lang.Object) -> a
+    void success(java.lang.Object) -> a
+com.tekartik.sqflite.operation.ExecuteOperation -> b.d.a.f.d:
+    com.tekartik.sqflite.SqlCommand command -> a
+    java.lang.Boolean inTransaction -> c
+    io.flutter.plugin.common.MethodChannel$Result result -> b
+    void error(java.lang.String,java.lang.String,java.lang.Object) -> a
+    java.lang.Object getArgument(java.lang.String) -> a
+    com.tekartik.sqflite.SqlCommand getSqlCommand() -> a
+    void success(java.lang.Object) -> a
+    java.lang.Boolean getInTransaction() -> c
+com.tekartik.sqflite.operation.MethodCallOperation -> b.d.a.f.e:
+    io.flutter.plugin.common.MethodCall methodCall -> a
+    com.tekartik.sqflite.operation.MethodCallOperation$Result result -> b
+    java.lang.Object getArgument(java.lang.String) -> a
+    com.tekartik.sqflite.operation.OperationResult getOperationResult() -> e
+com.tekartik.sqflite.operation.MethodCallOperation$Result -> b.d.a.f.e$a:
+    io.flutter.plugin.common.MethodChannel$Result result -> a
+    void error(java.lang.String,java.lang.String,java.lang.Object) -> a
+    void success(java.lang.Object) -> a
+com.tekartik.sqflite.operation.Operation -> b.d.a.f.f:
+    java.lang.Object getArgument(java.lang.String) -> a
+    com.tekartik.sqflite.SqlCommand getSqlCommand() -> a
+    boolean getNoResult() -> b
+    java.lang.Boolean getInTransaction() -> c
+com.tekartik.sqflite.operation.OperationResult -> b.d.a.f.g:
+    void error(java.lang.String,java.lang.String,java.lang.Object) -> a
+    void success(java.lang.Object) -> a
+com.tekartik.sqflite.operation.SqlErrorInfo -> b.d.a.f.h:
+    java.util.Map getMap(com.tekartik.sqflite.operation.Operation) -> a
 io.flutter.Log -> c.a.a:
     void d(java.lang.String,java.lang.String) -> a
     void e(java.lang.String,java.lang.String,java.lang.Throwable) -> a

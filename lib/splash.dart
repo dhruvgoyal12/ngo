@@ -90,7 +90,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
           PageTransition(type: PageTransitionType.rightToLeft, child: User()));
     }
     else if (status.first['value'] == 2) {
-       Navigator.push(
+       Navigator.pushReplacement(
                                   context,
                                   PageTransition(
                                       type: PageTransitionType.rightToLeft,

@@ -82,7 +82,8 @@ class welcome_screen extends StatelessWidget {
                         child: RoundedButton(
                             text: 'Report a needy',
                             onPressed: () {
-                              Navigator.push(
+                             
+                              Navigator.pushReplacement(
                                   context,
                                   PageTransition(
                                       type: PageTransitionType.rightToLeft,
@@ -95,7 +96,7 @@ class welcome_screen extends StatelessWidget {
                         child: RoundedButton(
                             text: 'Help a needy',
                             onPressed: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   PageTransition(
                                       type: PageTransitionType.rightToLeft,

@@ -48,6 +48,11 @@ class _homepageState extends State<homepage>
 
 
   }
+  Future<void> updateC1() async {
+    await DBHelper.insert('status',{'id':'c','value':3});
+
+
+  }
   @override
   void initState() {
      updateC();
@@ -66,6 +71,7 @@ class _homepageState extends State<homepage>
   }
 
   void _signOut() {
+    updateC1();
     FirebaseAuth.instance.signOut();
     Navigator.pop(context);
     //Navigator.popAndPushNamed(context,'/choice');

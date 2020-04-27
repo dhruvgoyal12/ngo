@@ -60,6 +60,7 @@ Referenced Strings:
   :authority
   :count
   :host
+  :memory:
   :method
   :path
   :scheme
@@ -937,6 +938,7 @@ Referenced Strings:
   SignIn.INTERNAL_API
   SignInClientImpl
   SignInCoordinator
+  Sqflite
   Ssl_Guard
   Starting
   StorageException
@@ -1437,6 +1439,7 @@ Referenced Strings:
   androidInstallIfNotAvailable
   androidMinimumVersion
   androidPackageName
+  androidThreadPriority
   android_id
   androidx.contentpager.content.wakelockid
   androidx.core:wake:
@@ -1485,6 +1488,7 @@ Referenced Strings:
   apps
   arch_disk_io_%d
   args
+  arguments
   arrayBaseOffset
   arrayIndexScale
   array_contains
@@ -1512,9 +1516,11 @@ Referenced Strings:
   background_mode
   backoff
   backoffMultiplier
+  bad_param
   balancerAddresses
   balancerRpcExecutorPool
   base
+  batch
   bearing
   begin_checkout
   bgcolor
@@ -1593,8 +1599,10 @@ Referenced Strings:
   client_name
   clipboard
   cliv
+  closeDatabase
   closeWebView
   closed
+  cmd
   cn
   cn.google
   code
@@ -1602,6 +1610,7 @@ Referenced Strings:
   collection_index
   collection_parents
   color
+  columns
   com.android.
   com.android.browser.headers
   com.android.org.conscrypt.OpenSSLProv...
@@ -1772,6 +1781,7 @@ Referenced Strings:
   com.google.protobuf.NewInstanceSchema...
   com.google.protobuf.UnknownFieldSetSc...
   com.google.protobuf.UnsafeUtil
+  com.tekartik.sqflite
   combine
   commit
   common_google_play_services_api_unava...
@@ -1813,6 +1823,7 @@ Referenced Strings:
   contentLanguage
   contentType
   context
+  continueOnError
   continueUrl
   cookie
   copyMemory
@@ -1859,8 +1870,10 @@ Referenced Strings:
   dayOfMonth
   ddp
   deadline
+  debug
   debug.deferred.deeplink
   debug.firebase.analytics.app
+  debugMode
   debugString
   decimal
   decompressor
@@ -1878,6 +1891,7 @@ Referenced Strings:
   delegate
   delegateBuilder
   delete
+  deleteDatabase
   deletion_error
   desc
   description
@@ -1941,6 +1955,7 @@ Referenced Strings:
   events
   exception
   exceptionHandler
+  execute
   executor
   executorPool
   exp
@@ -2107,6 +2122,7 @@ Referenced Strings:
   getChildId
   getConstructorId
   getCurrentEnvironment
+  getDatabasesPath
   getDouble
   getEmptyRegistry
   getExternalCacheDirectories
@@ -2125,6 +2141,7 @@ Referenced Strings:
   getNpnSelectedProtocol
   getObject
   getParentNodeId
+  getPlatformVersion
   getResId
   getResPackage
   getScionFrontendApiImplementation
@@ -2251,6 +2268,7 @@ Referenced Strings:
   idempotent
   identity
   in
+  inTransaction
   in_app_purchase
   includeMetadataChanges
   index
@@ -2266,6 +2284,7 @@ Referenced Strings:
   inputType
   inputTypeError
   input_method
+  insert
   insertProvider
   install_begin_timestamp_seconds
   install_referrer
@@ -2408,6 +2427,7 @@ Referenced Strings:
   lock
   log
   logId
+  logLevel
   logger
   login
   long
@@ -2647,6 +2667,7 @@ Referenced Strings:
   newPicker
   newState
   new_audience
+  noResult
   no_backup
   nodeId
   nonFatalStatusCodes
@@ -2677,7 +2698,9 @@ Referenced Strings:
   oneWay
   oobCode
   opaque
+  openDatabase
   operation
+  operations
   optional
   options
   orderBy
@@ -2817,6 +2840,7 @@ Referenced Strings:
   putObject
   quantity
   query
+  queryAsMapList
   queue
   quotaExceeded
   r
@@ -2830,6 +2854,7 @@ Referenced Strings:
   raw_events
   raw_events_metadata
   read
+  readOnly
   read_time_nanos
   read_time_seconds
   realtime
@@ -2840,6 +2865,8 @@ Referenced Strings:
   reauthenticateWithEmailPasswordWithData
   reauthenticateWithPhoneCredentialWith...
   recoverEmail
+  recovered
+  recoveredInTransaction
   referer
   referrer
   referrer_click_timestamp_seconds
@@ -2897,6 +2924,7 @@ Referenced Strings:
   roundCap
   round_robin
   rowid
+  rows
   runnable
   rw
   s
@@ -2987,6 +3015,7 @@ Referenced Strings:
   signOut
   sign_in_provider
   signed
+  singleInstance
   sink
   size
   sizeBytes
@@ -3002,6 +3031,8 @@ Referenced Strings:
   spec
   speed
   speed_accuracy
+  sql
+  sqlite_error
   squareCap
   ssaid_reporting_enabled
   sslEnabled
@@ -3081,6 +3112,7 @@ Referenced Strings:
   task
   tax
   te
+  tekartik_sqflite.db
   tenant
   tenantId
   term
@@ -3165,6 +3197,7 @@ Referenced Strings:
   unset
   unsupported
   untagSocket
+  update
   updateData
   updateEmail
   updatePassword

@@ -24,6 +24,7 @@ MERGED from [:url_launcher_macos] C:\Users\rushi\Work\AndroidStudioProjects\ngo\
 MERGED from [:url_launcher_web] C:\Users\rushi\Work\AndroidStudioProjects\ngo\build\url_launcher_web\intermediates\library_manifest\release\AndroidManifest.xml:2:1-7:12
 MERGED from [:camera] C:\Users\rushi\Work\AndroidStudioProjects\ngo\build\camera\intermediates\library_manifest\release\AndroidManifest.xml:2:1-10:12
 MERGED from [:fluttertoast] C:\Users\rushi\Work\AndroidStudioProjects\ngo\build\fluttertoast\intermediates\library_manifest\release\AndroidManifest.xml:2:1-7:12
+MERGED from [:sqflite] C:\Users\rushi\Work\AndroidStudioProjects\ngo\build\sqflite\intermediates\library_manifest\release\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-auth:19.2.0] C:\Users\rushi\.gradle\caches\transforms-2\files-2.1\c8b72275e916ed32c52cbb029194f794\firebase-auth-19.2.0\AndroidManifest.xml:17:1-42:12
 MERGED from [com.google.firebase:firebase-storage:17.0.0] C:\Users\rushi\.gradle\caches\transforms-2\files-2.1\d5a33cc1b19b6837d4af32955f6f40a5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:15:1-37:12
 MERGED from [com.google.firebase:firebase-analytics:17.3.0] C:\Users\rushi\.gradle\caches\transforms-2\files-2.1\18381af719273774a5c2409a2cc5a130\firebase-analytics-17.3.0\AndroidManifest.xml:2:1-9:12
@@ -260,6 +261,8 @@ MERGED from [:camera] C:\Users\rushi\Work\AndroidStudioProjects\ngo\build\camera
 MERGED from [:camera] C:\Users\rushi\Work\AndroidStudioProjects\ngo\build\camera\intermediates\library_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:fluttertoast] C:\Users\rushi\Work\AndroidStudioProjects\ngo\build\fluttertoast\intermediates\library_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:fluttertoast] C:\Users\rushi\Work\AndroidStudioProjects\ngo\build\fluttertoast\intermediates\library_manifest\release\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] C:\Users\rushi\Work\AndroidStudioProjects\ngo\build\sqflite\intermediates\library_manifest\release\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] C:\Users\rushi\Work\AndroidStudioProjects\ngo\build\sqflite\intermediates\library_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-auth:19.2.0] C:\Users\rushi\.gradle\caches\transforms-2\files-2.1\c8b72275e916ed32c52cbb029194f794\firebase-auth-19.2.0\AndroidManifest.xml:21:5-44
 MERGED from [com.google.firebase:firebase-auth:19.2.0] C:\Users\rushi\.gradle\caches\transforms-2\files-2.1\c8b72275e916ed32c52cbb029194f794\firebase-auth-19.2.0\AndroidManifest.xml:21:5-44
 MERGED from [com.google.firebase:firebase-storage:17.0.0] C:\Users\rushi\.gradle\caches\transforms-2\files-2.1\d5a33cc1b19b6837d4af32955f6f40a5\jetified-firebase-storage-17.0.0\AndroidManifest.xml:20:5-22:41
