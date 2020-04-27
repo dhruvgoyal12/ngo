@@ -204,6 +204,18 @@ class detailed_view extends StatelessWidget {
                             'accepted_by': loggedInUser,
                             'category': category,
                             'coordinate': coordinate,
+                            'Children Care':document.data['Children Care'],
+                            'Clothes':document.data['Clothes'],
+                            'Food':document.data['Food'],
+                            'Medicine':document.data['Medicine'],
+                            'Women Care':document.data['Women Care'],
+                            'img':document.data['img'],
+                            'landmark':document.data['landmark'],
+                            'latitude':document.data['latitude'],
+                            'longitude':document.data['longitude'],
+                            'status':document.data['status'],
+                            'time':document.data['time'],
+                            'user_id':document.data['user_id'],
                           });
                           document.reference.delete();
                           Navigator.pop(context);
