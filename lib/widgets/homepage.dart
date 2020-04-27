@@ -8,6 +8,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ngouser/widgets/uploadTab1.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'db_helper.dart';
+
 class homepage extends StatefulWidget {
   var img, initialPage;
   bool bottom;
@@ -41,9 +43,14 @@ class _homepageState extends State<homepage>
   TabController _tabController;
 
   String uid;
+  Future<void> updateC() async {
+    await DBHelper.insert('status',{'id':'c','value':1});
 
+
+  }
   @override
   void initState() {
+     updateC();
     _tabController = new TabController(vsync: this, length: 3);
     if (widget.initialPage != null) _tabController.animateTo(1);
     this.uid = '';
@@ -106,7 +113,7 @@ class _homepageState extends State<homepage>
                                   .snapshots(),
                               builder: (context, snapshot) {
                                 print(uid);
-                                if (snapshot.hasData == null) {
+                                if (snapshot.hasData == false) {
                                   return Text('Hello, User');
                                 } else {
                                   List<DocumentSnapshot> docs =
