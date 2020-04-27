@@ -14,6 +14,7 @@ class welcome_screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Material(
         child: Container(
             decoration: BoxDecoration(
