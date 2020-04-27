@@ -219,6 +219,18 @@ class detailed_view2 extends StatelessWidget {
                             'submitter_phone_no': submitter_phone_no,
                             'category': category,
                             'coordinate': coordinate,
+                            'Children Care':document.data['Children Care'],
+                            'Clothes':document.data['Clothes'],
+                            'Food':document.data['Food'],
+                            'Medicine':document.data['Medicine'],
+                            'Women Care':document.data['Women Care'],
+                            'img':document.data['img'],
+                            'landmark':document.data['landmark'],
+                            'latitude':document.data['latitude'],
+                            'longitude':document.data['longitude'],
+                            'status':document.data['status'],
+                            'time':document.data['time'],
+                            'user_id':document.data['user_id'],
                             //also add name and phone no. of submitter
                           });
                           document.reference.delete();
