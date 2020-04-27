@@ -34,8 +34,8 @@ class _RequestTab1State extends State<RequestTab1> {
       children: <Widget>[
         StreamBuilder<QuerySnapshot>(
           stream: _firestore
-              .collection('requests_added')
-              .orderBy('date', descending: true)
+              .collection('requests_accepted')
+              .orderBy('time', descending: true)
               .snapshots(),
           builder: (context, snapshot) {
             snapa = snapshot;
@@ -99,11 +99,12 @@ List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
     women = doc.data['Women Care'];
     medicine = doc.data['Medicine'];
     clothes = doc.data['Clothes'];
+
     food = doc.data['Food'];
     children = doc.data['Children Care'];
     latitude = doc.data['latitude'].toString();
     longitude = doc.data['longitude'].toString();
-    date = doc.data['date'].toString();
+    date = doc.data['time'].toString();
     instructions = doc.data['note'].toString();
     status = doc.data['status'].toString();
     landmark = doc.data['landmark'].toString();
@@ -153,7 +154,7 @@ List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
                         ),
                         FittedBox(
                           child: Text(
-                            "Date :   " + date.substring(0, date.indexOf('T')),
+                            "Date :   " + date.substring(0,(date.indexOf(' '))),
                             style: TextStyle(
                               fontFamily: 'Lato',
                               fontSize: 15,
@@ -312,7 +313,7 @@ void _settingModalBottomSheet(
                           Container(
                             margin: EdgeInsets.only(right: 10),
                             child: Text(
-                              date.substring(0, date.indexOf('T')),
+                              date.substring(0, date.indexOf(' ')),
                               style: TextStyle(
                                 fontFamily: 'Lato',
                                 fontSize: 15,

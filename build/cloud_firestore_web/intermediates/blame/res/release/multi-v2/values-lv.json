@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\rushi\\Work\\AndroidStudioProjects\\NG\\build\\cloud_firestore_web\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-lv\\values-lv.xml",
+            "outputFile": "C:\\Users\\rushi\\Work\\AndroidStudioProjects\\ngo\\build\\cloud_firestore_web\\intermediates\\res\\merged\\release\\values-lv\\values-lv.xml",
             "map": [
                 {
                     "source": "C:\\Users\\rushi\\.gradle\\caches\\transforms-2\\files-2.1\\82c12a45dc79d06c6df9a277cbb218e5\\jetified-play-services-basement-16.0.1\\res\\values-lv\\values.xml",
@@ -40,7 +40,7 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\rushi\\Work\\AndroidStudioProjects\\NG\\build\\cloud_firestore_web\\intermediates\\res\\merged\\release\\values-lv\\values-lv.xml",
+            "outputFile": "C:\\Users\\rushi\\Work\\AndroidStudioProjects\\ngo\\build\\cloud_firestore_web\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-lv\\values-lv.xml",
             "map": [
                 {
                     "source": "C:\\Users\\rushi\\.gradle\\caches\\transforms-2\\files-2.1\\82c12a45dc79d06c6df9a277cbb218e5\\jetified-play-services-basement-16.0.1\\res\\values-lv\\values.xml",

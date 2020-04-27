@@ -3430,6 +3430,7 @@ drawable:common_google_signin_btn_text_disabled:2130968590 => [drawable:googleg_
 drawable:common_google_signin_btn_text_light:2130968591 => [drawable:common_google_signin_btn_text_disabled:2130968590, drawable:common_google_signin_btn_text_light_focused:2130968592, drawable:common_google_signin_btn_text_light_normal:2130968593]
 drawable:common_google_signin_btn_text_light_focused:2130968592 => [drawable:common_google_signin_btn_text_light_normal:2130968593]
 drawable:common_google_signin_btn_text_light_normal:2130968593 => [drawable:common_google_signin_btn_text_light_normal_background:2130968594, drawable:googleg_standard_color_18:2130968596]
+drawable:launch_background:2130968598 => [drawable:icon:2130968597]
 drawable:notification_action_background:2130968599 => [color:ripple_material_light:2130837517, dimen:compat_button_inset_vertical_material:2130903041, dimen:compat_button_inset_horizontal_material:2130903040, dimen:compat_control_corner_material:2130903044, dimen:compat_button_padding_vertical_material:2130903043, dimen:compat_button_padding_horizontal_material:2130903042]
 drawable:notification_bg:2130968600 => [drawable:notification_bg_normal_pressed:2130968605, drawable:notification_bg_normal:2130968604]
 drawable:notification_bg_low:2130968601 => [drawable:notification_bg_low_pressed:2130968603, drawable:notification_bg_low_normal:2130968602]

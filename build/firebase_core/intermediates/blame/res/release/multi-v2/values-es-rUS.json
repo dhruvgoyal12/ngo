@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\rushi\\Work\\AndroidStudioProjects\\NG\\build\\firebase_core\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-es-rUS\\values-es-rUS.xml",
+            "outputFile": "C:\\Users\\rushi\\Work\\AndroidStudioProjects\\ngo\\build\\firebase_core\\intermediates\\res\\merged\\release\\values-es-rUS\\values-es-rUS.xml",
             "map": [
                 {
                     "source": "C:\\Users\\rushi\\.gradle\\caches\\transforms-2\\files-2.1\\9dacf9516413cf5e5b34c6b4508340e4\\core-1.0.0\\res\\values-es-rUS\\values-es-rUS.xml",
@@ -40,7 +40,7 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\rushi\\Work\\AndroidStudioProjects\\NG\\build\\firebase_core\\intermediates\\res\\merged\\release\\values-es-rUS\\values-es-rUS.xml",
+            "outputFile": "C:\\Users\\rushi\\Work\\AndroidStudioProjects\\ngo\\build\\firebase_core\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-es-rUS\\values-es-rUS.xml",
             "map": [
                 {
                     "source": "C:\\Users\\rushi\\.gradle\\caches\\transforms-2\\files-2.1\\9dacf9516413cf5e5b34c6b4508340e4\\core-1.0.0\\res\\values-es-rUS\\values-es-rUS.xml",
