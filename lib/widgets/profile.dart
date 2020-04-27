@@ -50,7 +50,8 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Colors.blueAccent,
       appBar: AppBar(
-        title: Text("           My Profile"),
+        title: Text("My Profile"),
+        centerTitle: true,
         backgroundColor: Colors.black,
       ),
       body: Center(
@@ -172,11 +173,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           dense: true,
                           leading:
                               Icon(Icons.email, size: 30, color: Colors.black),
-                          title: Text("  " + widget.email,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                  fontFamily: 'Lato')),
+                          title: FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Text("  " + widget.email,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontFamily: 'Lato')),
+                          ),
                         ),
                       ),
                     ),
