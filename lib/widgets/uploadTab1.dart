@@ -25,9 +25,9 @@ class UploadTab extends StatefulWidget {
   var land_test = '';
   bool food = false,
       clothes = false,
-      medicine = false,
+      medicine = false,//Others
       women = false,
-      children = false;
+      children = false;//Shelter
 
   var initialPage,
       uid,
@@ -87,13 +87,13 @@ class _UploadTabState extends State<UploadTab> {
     if (food == true)
       category = 'Food';
     else if (women == true)
-      category = 'Women Care';
+      category = 'Women care';
     else if (clothes == true)
       category = 'Clothes';
     else if (medicine == true)
-      category = 'Medicine';
+      category = 'Others';
     else
-      category = 'Children Care';
+      category = 'Shelter';
     var filename =
         'Images/' + widget.uid + '/' + DateTime.now().toIso8601String();
     final StorageReference firebaseStorageRef =
@@ -143,9 +143,9 @@ class _UploadTabState extends State<UploadTab> {
         //'address': _landmark,
         'Food': food,
         'Clothes': clothes,
-        'Medicine': medicine,
-        'Women Care': women,
-        'Children Care': children
+        'Others': medicine,
+        'Women care': women,
+        'Shelter': children
       },
     );
 
@@ -941,33 +941,7 @@ class _UploadTabState extends State<UploadTab> {
                                             },
                                           ),
                                         ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.38,
-                                          child: CheckboxListTile(
-                                            value: widget.medicine,
-                                            title: Text('Medicine',
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    fontSize: 10)),
-                                            onChanged: (val) {
-                                              setState(() {
-                                                if (!val) {
-                                                  widget.medicine = val;
-                                                } else {
-                                                  widget.food = !val;
-                                                  widget.children = !val;
-                                                  widget.clothes = !val;
-                                                  widget.medicine = val;
-                                                  widget.women = !val;
-                                                }
-                                              });
-                                            },
-                                          ),
-                                        ),
+                                       
                                         Container(
                                           width: MediaQuery.of(context)
                                                   .size
@@ -1041,20 +1015,10 @@ class _UploadTabState extends State<UploadTab> {
                                               0.38,
                                           child: CheckboxListTile(
                                             value: widget.children,
-                                            title: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text('Children',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Lato',
-                                                        fontSize: 10)),
-                                                Text('Care',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Lato',
-                                                        fontSize: 10)),
-                                              ],
-                                            ),
+                                            title: Text('Shelter',
+                                                style: TextStyle(
+                                                    fontFamily: 'Lato',
+                                                    fontSize: 10)),
                                             onChanged: (val) {
                                               setState(() {
                                                 if (!val) {
@@ -1064,6 +1028,33 @@ class _UploadTabState extends State<UploadTab> {
                                                   widget.children = val;
                                                   widget.clothes = !val;
                                                   widget.medicine = !val;
+                                                  widget.women = !val;
+                                                }
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                         Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.38,
+                                          child: CheckboxListTile(
+                                            value: widget.medicine,
+                                            title: Text('Others',
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    fontFamily: 'Lato',
+                                                    fontSize: 10)),
+                                            onChanged: (val) {
+                                              setState(() {
+                                                if (!val) {
+                                                  widget.medicine = val;
+                                                } else {
+                                                  widget.food = !val;
+                                                  widget.children = !val;
+                                                  widget.clothes = !val;
+                                                  widget.medicine = val;
                                                   widget.women = !val;
                                                 }
                                               });

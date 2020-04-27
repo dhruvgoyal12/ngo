@@ -96,12 +96,12 @@ List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
         address;
 
     bool food, clothes, medicine, women, children;
-    women = doc.data['Women Care'];
-    medicine = doc.data['Medicine'];
+    women = doc.data['Women care'];
+    medicine = doc.data['Others'];
     clothes = doc.data['Clothes'];
 
     food = doc.data['Food'];
-    children = doc.data['Children Care'];
+    children = doc.data['Shelter'];
     latitude = doc.data['latitude'].toString();
     longitude = doc.data['longitude'].toString();
     date = doc.data['time'].toString();
@@ -237,7 +237,7 @@ String Category(food, medicine, women, clothes, children) {
     s += 'Food ';
   }
   if (medicine == true) {
-    s += 'Medicine ';
+    s += 'Others ';
   }
   if (women == true) {
     s += 'Women Care ';
@@ -246,7 +246,7 @@ String Category(food, medicine, women, clothes, children) {
     s += 'Clothes ';
   }
   if (children == true) {
-    s += 'Children Care';
+    s += 'Shelter ';
   }
   return s;
 }
