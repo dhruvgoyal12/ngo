@@ -1,3 +1,5 @@
+import 'package:ngouser/user.dart';
+
 import 'categories.dart';
 import 'register.dart';
 import 'root.dart';
@@ -10,6 +12,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'dart:async';
 import 'package:page_transition/page_transition.dart';
 import 'authentication.dart';
+import './widgets/db_helper.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -63,18 +66,39 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   }
 
   onDoneloading() async {
+    List<Map<String, Object>> status;
+    //DBHelper.insert('status',{'id':'c','value':1});
+    status = await DBHelper.getData('status');
+     print(status.isEmpty);
+    if (status.isEmpty||status.first['value'] == 3) {
+     
 //    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
 //      return LoginScreen();
-    return Navigator.pushReplacement(
-        context,
-        PageTransition(type: PageTransitionType.fade, child: welcome_screen()
+      return Navigator.pushReplacement(
+          context,
+          PageTransition(type: PageTransitionType.fade, child: welcome_screen()
 //           RootPage(
 //               auth: Auth(),
 //             )
 //                LoginScreen(
 //              auth: Auth(),
 //            )
-            ));
+              ));
+    } else if (status.first['value'] == 1) {
+      print('going to user');
+      Navigator.pushReplacement(context,
+          PageTransition(type: PageTransitionType.rightToLeft, child: User()));
+    }
+    else if (status.first['value'] == 2) {
+       Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.rightToLeft,
+                                      child: RootPage(
+                                        auth: Auth(),
+                                      )));
+    }
+
   }
 
   @override

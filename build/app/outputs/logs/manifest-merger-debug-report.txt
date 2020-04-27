@@ -23,6 +23,7 @@ MERGED from [:url_launcher_macos] C:\Projects\Zine\TroubleShoot\ngo\build\url_la
 MERGED from [:url_launcher_web] C:\Projects\Zine\TroubleShoot\ngo\build\url_launcher_web\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:camera] C:\Projects\Zine\TroubleShoot\ngo\build\camera\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-10:12
 MERGED from [:fluttertoast] C:\Projects\Zine\TroubleShoot\ngo\build\fluttertoast\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:sqflite] C:\Projects\Zine\TroubleShoot\ngo\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-firestore:21.4.2] C:\Users\IT\.gradle\caches\transforms-2\files-2.1\72e7eb10c44ccca3e6ee14e6d6ad0462\jetified-firebase-firestore-21.4.2\AndroidManifest.xml:2:1-26:12
 MERGED from [com.google.firebase:firebase-core:17.3.0] C:\Users\IT\.gradle\caches\transforms-2\files-2.1\48edf4a761a734c1ddeb43b636373e3d\firebase-core-17.3.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-auth:19.2.0] C:\Users\IT\.gradle\caches\transforms-2\files-2.1\c8b72275e916ed32c52cbb029194f794\firebase-auth-19.2.0\AndroidManifest.xml:17:1-42:12
@@ -259,6 +260,8 @@ MERGED from [:camera] C:\Projects\Zine\TroubleShoot\ngo\build\camera\intermediat
 MERGED from [:camera] C:\Projects\Zine\TroubleShoot\ngo\build\camera\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:fluttertoast] C:\Projects\Zine\TroubleShoot\ngo\build\fluttertoast\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:fluttertoast] C:\Projects\Zine\TroubleShoot\ngo\build\fluttertoast\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] C:\Projects\Zine\TroubleShoot\ngo\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] C:\Projects\Zine\TroubleShoot\ngo\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-firestore:21.4.2] C:\Users\IT\.gradle\caches\transforms-2\files-2.1\72e7eb10c44ccca3e6ee14e6d6ad0462\jetified-firebase-firestore-21.4.2\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-firestore:21.4.2] C:\Users\IT\.gradle\caches\transforms-2\files-2.1\72e7eb10c44ccca3e6ee14e6d6ad0462\jetified-firebase-firestore-21.4.2\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-core:17.3.0] C:\Users\IT\.gradle\caches\transforms-2\files-2.1\48edf4a761a734c1ddeb43b636373e3d\firebase-core-17.3.0\AndroidManifest.xml:5:5-44

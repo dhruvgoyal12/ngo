@@ -1,8 +1,11 @@
-#Mon Apr 27 14:39:53 IST 2020
+#Tue Apr 28 03:41:32 IST 2020
 base.2=C\:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes2.dex
 base.1=C\:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
 base.0=C\:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
+renamed.21=classes22.dex
 renamed.20=classes21.dex
+path.21=classes_18.dex
+base.21=C\:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\out\\classes_18.dex
 path.20=classes_9.dex
 base.20=C\:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\out\\classes_9.dex
 path.9=classes_14.dex

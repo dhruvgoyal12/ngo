@@ -11,6 +11,7 @@ import 'package:ngouser/widgets/username.dart';
 import 'package:page_transition/page_transition.dart';
 
 import './Constants.dart';
+import 'db_helper.dart';
 import 'homepage.dart';
 
 class login extends StatefulWidget {
@@ -52,7 +53,7 @@ class _loginState extends State<login> {
           fontSize: 20);
     };
     final PhoneVerificationCompleted verificationSuccess =
-        (AuthCredential credential) {
+        (AuthCredential credential) async {
        setState((){
 showSpinner = true;
           });
@@ -66,7 +67,10 @@ showSpinner = true;
       setState(() {
          showSpinner = false;
       });
+       //DBHelper.insert('status',{'id' : 'c','value':1});
+      // DBHelper.insert('status',{'id':'c','value':1});
       if(newUser==true){
+       
       Navigator.push(
           context,
           PageTransition(
