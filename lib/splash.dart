@@ -1,5 +1,5 @@
 import 'package:ngouser/user.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'categories.dart';
 import 'register.dart';
 import 'root.dart';
@@ -69,9 +69,9 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     List<Map<String, Object>> status;
     //DBHelper.insert('status',{'id':'c','value':1});
     status = await DBHelper.getData('status');
-     print(status.isEmpty);
+    print(status.isEmpty);
     if (status.isEmpty||status.first['value'] == 3) {
-     
+
 //    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
 //      return LoginScreen();
       return Navigator.pushReplacement(
@@ -83,20 +83,20 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 //                LoginScreen(
 //              auth: Auth(),
 //            )
-              ));
+          ));
     } else if (status.first['value'] == 1) {
       print('going to user');
       Navigator.pushReplacement(context,
           PageTransition(type: PageTransitionType.rightToLeft, child: User()));
     }
     else if (status.first['value'] == 2) {
-       Navigator.pushReplacement(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType.rightToLeft,
-                                      child: RootPage(
-                                        auth: Auth(),
-                                      )));
+      Navigator.pushReplacement(
+          context,
+          PageTransition(
+              type: PageTransitionType.rightToLeft,
+              child: RootPage(
+                auth: Auth(),
+              )));
     }
 
   }
@@ -223,6 +223,44 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                   ),
                 ],
               ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 25),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Created with',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 15),
+                          ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: FaIcon(
+                                FontAwesomeIcons.solidHeart,
+                                color: Colors.red,
+                              )),
+                          Text(
+                            'by Zine, MNIT Jaipur',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 15),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
