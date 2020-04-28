@@ -25,9 +25,9 @@ class UploadTab extends StatefulWidget {
   var land_test = '';
   bool food = false,
       clothes = false,
-      medicine = false,//Others
+      medicine = false, //Others
       women = false,
-      children = false;//Shelter
+      children = false; //Shelter
 
   var initialPage,
       uid,
@@ -108,6 +108,7 @@ class _UploadTabState extends State<UploadTab> {
     city = city.substring(city.indexOf(',') + 1, city.lastIndexOf(','));
     city = city.substring(city.indexOf(',') + 1, city.lastIndexOf(','));
     print(city);
+
     await _firestore.collection('requests').add(
       {
         //'location': widget.location.toString(),
@@ -308,13 +309,11 @@ class _UploadTabState extends State<UploadTab> {
           ),
           body: StatefulBuilder(
             builder: (BuildContext context, StateSetter st) {
-               FirebaseAuth.instance.currentUser().then((val) {
-     
-        uid = val.uid;
-     
-    }).catchError((e) {
-      print(e);
-    });
+              FirebaseAuth.instance.currentUser().then((val) {
+                uid = val.uid;
+              }).catchError((e) {
+                print(e);
+              });
 
               return Container(
                 decoration: BoxDecoration(
@@ -333,7 +332,7 @@ class _UploadTabState extends State<UploadTab> {
                             .snapshots(),
                         builder: (context, snapshot) {
                           print(uid);
-                          if (snapshot.hasData==false||
+                          if (snapshot.hasData == false ||
                               snapshot.data == null) {
                             return CircularProgressIndicator();
                           } else {
@@ -483,6 +482,12 @@ class _UploadTabState extends State<UploadTab> {
                           )),
                       onPressed: () {
                         if (_instructions.text.toString().isNotEmpty) {
+                          Fluttertoast.showToast(
+                              msg:
+                                  'It may take a while for requests to appear!',
+                              gravity: ToastGravity.TOP,
+                              fontSize: 20,
+                              toastLength: Toast.LENGTH_SHORT);
                           upload(instructions, food, clothes, medicine, women,
                               children);
                           Navigator.popAndPushNamed(context, '/homepage');
@@ -941,7 +946,6 @@ class _UploadTabState extends State<UploadTab> {
                                             },
                                           ),
                                         ),
-                                       
                                         Container(
                                           width: MediaQuery.of(context)
                                                   .size
@@ -1034,7 +1038,7 @@ class _UploadTabState extends State<UploadTab> {
                                             },
                                           ),
                                         ),
-                                         Container(
+                                        Container(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *

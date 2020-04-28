@@ -80,7 +80,7 @@ class welcome_screen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 30.0),
                         child: RoundedButton(
-                            text: 'Report a needy',
+                            text: 'User',
                             onPressed: () {
                              
                               Navigator.pushReplacement(
@@ -94,7 +94,7 @@ class welcome_screen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 30.0),
                         child: RoundedButton(
-                            text: 'Help a needy',
+                            text: 'NGO',
                             onPressed: () {
                               Navigator.pushReplacement(
                                   context,

@@ -446,7 +446,7 @@ showSpinner = true;
 
       print(e);
       Fluttertoast.showToast(
-          msg: e.toString(),
+          msg: "Incoorect OTP or network issue.Kindly try again.",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.TOP,
           fontSize: 20);
