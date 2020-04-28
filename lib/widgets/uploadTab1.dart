@@ -493,7 +493,7 @@ class _UploadTabState extends State<UploadTab> {
                           Navigator.popAndPushNamed(context, '/homepage');
                         } else {
                           Fluttertoast.showToast(
-                              msg: 'Please enter instructions',
+                              msg: 'Please enter description',
                               gravity: ToastGravity.TOP,
                               toastLength: Toast.LENGTH_SHORT);
                         }
