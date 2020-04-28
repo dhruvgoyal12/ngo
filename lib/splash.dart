@@ -1,5 +1,6 @@
 import 'package:ngouser/user.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ngouser/widgets/homepage.dart';
 import 'categories.dart';
 import 'register.dart';
 import 'root.dart';
@@ -86,8 +87,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
           ));
     } else if (status.first['value'] == 1) {
       print('going to user');
-      Navigator.pushReplacement(context,
-          PageTransition(type: PageTransitionType.rightToLeft, child: User()));
+      Navigator.of(context).pushReplacementNamed('/homepage');
     }
     else if (status.first['value'] == 2) {
       Navigator.pushReplacement(
@@ -98,7 +98,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                 auth: Auth(),
               )));
     }
-
+dispose();
   }
 
   @override

@@ -45,18 +45,16 @@ class _homepageState extends State<homepage>
 
   String uid;
   Future<void> updateC() async {
-    await DBHelper.insert('status',{'id':'c','value':1});
-
-
+    await DBHelper.insert('status', {'id': 'c', 'value': 1});
   }
+
   Future<void> updateC1() async {
-    await DBHelper.insert('status',{'id':'c','value':3});
-
-
+    await DBHelper.insert('status', {'id': 'c', 'value': 3});
   }
+
   @override
   void initState() {
-     updateC();
+    updateC();
     _tabController = new TabController(vsync: this, length: 3);
     if (widget.initialPage != null) _tabController.animateTo(1);
     this.uid = '';
@@ -77,9 +75,9 @@ class _homepageState extends State<homepage>
     //Navigator.pop(context);
     //Navigator.popAndPushNamed(context,'/choice');
     Navigator.pushReplacement(
-            context,
-            PageTransition(
-                type: PageTransitionType.leftToRight, child: welcome_screen()));
+        context,
+        PageTransition(
+            type: PageTransitionType.leftToRight, child: welcome_screen()));
     //Navigator.push(context, MaterialPageRoute(builder: (context) => choice()));
 
     //Navigator.of(context).pushReplacementNamed('/choice');
@@ -93,190 +91,209 @@ class _homepageState extends State<homepage>
     return Scaffold(
       backgroundColor: Colors.grey,
       drawer: Drawer(
-        child: ListView(
+        child: Stack(
           children: <Widget>[
-            Container(
-              //color: Colors.grey,
-              height: MediaQuery.of(context).size.height,
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    SafeArea(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height / 3,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/Drawer.jpg'),
-                            fit: BoxFit.cover,
+            ListView(
+              children: <Widget>[
+                Container(
+                  //color: Colors.grey,
+                  height: MediaQuery.of(context).size.height,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(
+                      //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        SafeArea(
+                          child: Container(
+                            height: MediaQuery.of(context).size.height / 3,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/Drawer.jpg'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(30.0),
+                                child: StreamBuilder<QuerySnapshot>(
+                                  stream: _firestore
+                                      .collection(uid)
+                                      .orderBy('date', descending: true)
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    print(uid);
+                                    if (snapshot.hasData == false) {
+                                      return Text('Hello, User');
+                                    } else {
+                                      List<DocumentSnapshot> docs =
+                                          snapshot.data.documents;
+                                      print(docs[0].data['username']);
+
+                                      if (docs[0]
+                                          .data['username']
+                                          .toString()
+                                          .isNotEmpty) {
+                                        widget.username =
+                                            docs[0].data['username'] + '!';
+                                      } else {
+                                        widget.username = 'user !';
+                                      }
+                                      if (docs[0]
+                                          .data['username']
+                                          .toString()
+                                          .isNotEmpty) {
+                                        widget.email = docs[0].data['email'];
+                                      } else {
+                                        widget.email = 'null';
+                                      }
+                                      if (docs[0]
+                                          .data['phone']
+                                          .toString()
+                                          .isNotEmpty) {
+                                        widget.phone = docs[0].data['phone'];
+                                      } else {
+                                        widget.phone = 'null';
+                                      }
+
+                                      return Text(
+                                        'Hello, ' + widget.username,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(30.0),
-                            child: StreamBuilder<QuerySnapshot>(
-                              stream: _firestore
-                                  .collection(uid)
-                                  .orderBy('date', descending: true)
-                                  .snapshots(),
-                              builder: (context, snapshot) {
-                                print(uid);
-                                if (snapshot.hasData == false) {
-                                  return Text('Hello, User');
-                                } else {
-                                  List<DocumentSnapshot> docs =
-                                      snapshot.data.documents;
-                                  print(docs[0].data['username']);
-
-                                  if (docs[0]
-                                      .data['username']
-                                      .toString()
-                                      .isNotEmpty) {
-                                    widget.username =
-                                        docs[0].data['username'] + '!';
-                                  } else {
-                                    widget.username = 'user !';
-                                  }
-                                  if (docs[0]
-                                      .data['username']
-                                      .toString()
-                                      .isNotEmpty) {
-                                    widget.email = docs[0].data['email'];
-                                  } else {
-                                    widget.email = 'null';
-                                  }
-                                  if (docs[0]
-                                      .data['phone']
-                                      .toString()
-                                      .isNotEmpty) {
-                                    widget.phone = docs[0].data['phone'];
-                                  } else {
-                                    widget.phone = 'null';
-                                  }
-
-                                  return Text(
-                                    'Hello, ' + widget.username,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  );
-                                }
+                        Container(
+                          height: MediaQuery.of(context).size.height / 2,
+                          child: ListView(children: <Widget>[
+                            SizedBox(
+                              height: 15,
+                            ),
+                            ListTile(
+                              title: Text(
+                                "Profile",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              leading: Icon(
+                                Icons.account_box,
+                                size: 40,
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      child: ProfilePage(
+                                          widget.username,
+                                          widget.email,
+                                          widget.phone,
+                                          widget.cam),
+                                      type: PageTransitionType.downToUp,
+                                    ));
                               },
                             ),
+                            ListTile(
+                              title: Text(
+                                "Existing Requests",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              leading: Icon(
+                                Icons.book,
+                                size: 40,
+                              ),
+                              onTap: () {
+                                Navigator.pushReplacementNamed(
+                                    context, '/homepage');
+                              },
+                            ),
+                            ListTile(
+                              title: Text(
+                                "Create New Request ",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              leading: Icon(
+                                Icons.add_box,
+                                size: 40,
+                              ),
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => homepage(
+                                            null,
+                                            1,
+                                            widget.cam,
+                                            widget.initialLatitude,
+                                            widget.initialLongitude,
+                                            widget.landmark,
+                                            widget.pickedLocation,
+                                            widget.food,
+                                            widget.clothes,
+                                            widget.women,
+                                            widget.medicine,
+                                            widget.children,
+                                            widget.bottom)));
+                              },
+                            ),
+                            ListTile(
+                              title: Text(
+                                "Sign out",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              leading: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.arrow_back,
+                                    size: 40,
+                                  ),
+                                ],
+                              ),
+                              onTap: _signOut,
+                            ),
+                            SizedBox(
+                              height: 140,
+                            ),
+                          ]),
+                        ),
+                      ],
+                      // mainAxisAlignment: MainAxisAlignment.end,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Text(
+                            "\u00A9 Zine",
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height / 2,
-                      child: ListView(children: <Widget>[
-                        SizedBox(
-                          height: 15,
-                        ),
-                        ListTile(
-                          title: Text(
-                            "Profile",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          leading: Icon(
-                            Icons.account_box,
-                            size: 40,
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                  child: ProfilePage(widget.username,
-                                      widget.email, widget.phone, widget.cam),
-                                  type: PageTransitionType.downToUp,
-                                ));
-                          },
-                        ),
-                        ListTile(
-                          title: Text(
-                            "Existing Requests",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          leading: Icon(
-                            Icons.book,
-                            size: 40,
-                          ),
-                          onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, '/homepage');
-                          },
-                        ),
-                        ListTile(
-                          title: Text(
-                            "Create New Request ",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          leading: Icon(
-                            Icons.add_box,
-                            size: 40,
-                          ),
-                          onTap: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => homepage(
-                                        null,
-                                        1,
-                                        widget.cam,
-                                        widget.initialLatitude,
-                                        widget.initialLongitude,
-                                        widget.landmark,
-                                        widget.pickedLocation,
-                                        widget.food,
-                                        widget.clothes,
-                                        widget.women,
-                                        widget.medicine,
-                                        widget.children,
-                                        widget.bottom)));
-                          },
-                        ),
-                        ListTile(
-                          title: Text(
-                            "Sign out",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          leading: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.arrow_back,
-                                size: 40,
-                              ),
-                            ],
-                          ),
-                          onTap: _signOut,
-                        ),
-                        SizedBox(
-                          height: 80,
-                        ),
-                        Center(
-                          child: Container(
-                            child: Text("\u00A9 Sanjeevani"),
-                          ),
-                        ),
-                      ]),
-                    )
-                  ],
-                ),
-              ),
-            ),
+                    ],
+                  ),
           ],
         ),
       ),
@@ -326,7 +343,7 @@ class _homepageState extends State<homepage>
           //SizedBox(child: CircularProgressIndicator(),height:30 ,width: 30,),
           //HomeTab(this.uid),
 
-          Container(height:600,child: RequestTab(this.uid)),
+          Container(height: 600, child: RequestTab(this.uid)),
           UploadTab(
               widget.img,
               widget.initialPage,

@@ -22,16 +22,15 @@ class tab extends StatefulWidget {
   @override
   _tabState createState() => _tabState();
 }
+
 Future<void> updateC() async {
-    await DBHelper.insert('status',{'id':'c','value':2});
+  await DBHelper.insert('status', {'id': 'c', 'value': 2});
+}
 
+Future<void> updateC1() async {
+  await DBHelper.insert('status', {'id': 'c', 'value': 3});
+}
 
-  }
-  Future<void> updateC1() async {
-    await DBHelper.insert('status',{'id':'c','value':3});
-
-
-  }
 class _tabState extends State<tab> {
   @override
   void initState() {
@@ -39,6 +38,7 @@ class _tabState extends State<tab> {
     // TODO: implement initState
     super.initState();
   }
+
   final _auth = FirebaseAuth.instance;
 
   final _firestore = Firestore.instance;
@@ -47,7 +47,6 @@ class _tabState extends State<tab> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        
         return true;
       },
       child: Container(
@@ -55,211 +54,218 @@ class _tabState extends State<tab> {
           length: 2,
           child: Scaffold(
             drawer: Drawer(
-                child: ListView(
-              children: <Widget>[
-                DrawerHeader(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 25),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Sanjeevani',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 30,
-                                letterSpacing: 0.2,
-                                fontWeight: FontWeight.w100,
-                                fontFamily: 'Montserrat',
-                                color: Colors.white)),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          widget.loggedinUser.email,
-                          style: TextStyle(
-                              fontSize: 16,
-                              letterSpacing: 0.6,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('images/wel11.jpg'),
-                          fit: BoxFit.cover)),
-                ),
-                ListTile(
-                  title: Row(
+              child: Stack(
+                children: <Widget>[
+                  ListView(
+                    shrinkWrap: true,
                     children: <Widget>[
-                      Icon(Icons.add_circle),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: Text(
-                          'Change Categories',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black),
+                      DrawerHeader(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text('Sanjeevani',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      letterSpacing: 0.2,
+                                      fontWeight: FontWeight.w100,
+                                      fontFamily: 'Montserrat',
+                                      color: Colors.white)),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                widget.loggedinUser.email,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    letterSpacing: 0.6,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('images/wel11.jpg'),
+                                fit: BoxFit.cover)),
                       ),
-                    ],
-                  ),
-                  onTap: () async {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.rightToLeft,
-                            child: Categories2()));
-                  },
-                ),
-                ListTile(
-                  title: Row(
-                    children: <Widget>[
-                      Icon(Icons.autorenew),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: Text(
-                          'Change Password',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black),
+                      ListTile(
+                        title: Row(
+                          children: <Widget>[
+                            Icon(Icons.add_circle),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0),
+                              child: Text(
+                                'Change Categories',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black),
+                              ),
+                            ),
+                          ],
                         ),
+                        onTap: () async {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.rightToLeft,
+                                  child: Categories2()));
+                        },
                       ),
-                    ],
-                  ),
-                  onTap: () async {
-                    try {
+                      ListTile(
+                        title: Row(
+                          children: <Widget>[
+                            Icon(Icons.autorenew),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0),
+                              child: Text(
+                                'Change Password',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black),
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () async {
+                          try {
 //                    final loggedinUser = await _auth.currentUser();
 
-                      final exist = await _auth
-                          .fetchSignInMethodsForEmail(email: widget.loggedinUser.email)
-                          .toString();
-                      if (exist != null) {
-                        await _auth.sendPasswordResetEmail(
-                            email: widget.loggedinUser.email);
-                        var alertDialog = AlertUser(
-                          title: 'Success!',
-                          content: 'Please check your email',
-                          btnText: 'Back',
-                        );
-                        showDialog(
-                            context: (context),
-                            builder: (context) {
-                              return alertDialog;
-                            });
-                      }
-                    } catch (e) {
-                      var alertDialog = AlertUser(
-                        title: 'Oops',
-                        content: 'An error occured. Please try later',
-                        btnText: 'Back',
-                      );
-                      showDialog(
-                          context: (context),
-                          builder: (context) {
-                            return alertDialog;
-                          });
-                    }
-                  },
-                ),
-                ListTile(
-                  title: Row(
-                    children: <Widget>[
-                      Icon(Icons.exit_to_app),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: Text(
-                          'Logout',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black),
-                        ),
+                            final exist = await _auth
+                                .fetchSignInMethodsForEmail(
+                                    email: widget.loggedinUser.email)
+                                .toString();
+                            if (exist != null) {
+                              await _auth.sendPasswordResetEmail(
+                                  email: widget.loggedinUser.email);
+                              var alertDialog = AlertUser(
+                                title: 'Success!',
+                                content: 'Please check your email',
+                                btnText: 'Back',
+                              );
+                              showDialog(
+                                  context: (context),
+                                  builder: (context) {
+                                    return alertDialog;
+                                  });
+                            }
+                          } catch (e) {
+                            var alertDialog = AlertUser(
+                              title: 'Oops',
+                              content: 'An error occured. Please try later',
+                              btnText: 'Back',
+                            );
+                            showDialog(
+                                context: (context),
+                                builder: (context) {
+                                  return alertDialog;
+                                });
+                          }
+                        },
                       ),
-                    ],
-                  ),
-                  onTap: () async {
-                    updateC1();
-                    await _auth.signOut();
-                    Navigator.pushReplacement(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.leftToRight,
-                            child: welcome_screen()));
-                  },
-                ),
-                ListTile(
-                  title: Row(
-                    children: <Widget>[
-                      Icon(Icons.delete),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: Text(
-                          'Delete Account',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black),
+                      ListTile(
+                        title: Row(
+                          children: <Widget>[
+                            Icon(Icons.exit_to_app),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0),
+                              child: Text(
+                                'Logout',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black),
+                              ),
+                            ),
+                          ],
                         ),
+                        onTap: () async {
+                          updateC1();
+                          await _auth.signOut();
+                          Navigator.pushReplacement(
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.leftToRight,
+                                  child: welcome_screen()));
+                        },
                       ),
-                    ],
-                  ),
-                  onTap: () async {
+                      ListTile(
+                        title: Row(
+                          children: <Widget>[
+                            Icon(Icons.delete),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0),
+                              child: Text(
+                                'Delete Account',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black),
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () async {
+                          try {
+                            updateC1();
+                            QuerySnapshot req = await _firestore
+                                .collection('requests_accepted')
+                                .getDocuments();
+                            for (var us in req.documents) {
+                              if (widget.loggedinUser.email ==
+                                  us.data['accepted_by']) {
+                                _firestore.collection('requests').add({
+                                  'img_url': us.data['img_url'],
+                                  'city': us.data['city'],
+                                  'address': us.data['address'],
+                                  'note': us.data['note'],
+                                  'time': us.data['time'],
+                                  'submitted_by': us.data['submitted_by'],
+                                  'submitter_phone_no':
+                                      us.data['submitter_phone_no'],
+                                  'category': us.data['category'],
+                                });
+                                us.reference.delete();
+                              }
+                            }
 
-                    try {
-                      updateC1();
-                      QuerySnapshot req = await _firestore
-                          .collection('requests_accepted')
-                          .getDocuments();
-                      for (var us in req.documents) {
-                        if (widget.loggedinUser.email == us.data['accepted_by']) {
-                          _firestore.collection('requests').add({
-                            'img_url': us.data['img_url'],
-                            'city': us.data['city'],
-                            'address': us.data['address'],
-                            'note': us.data['note'],
-                            'time': us.data['time'],
-                            'submitted_by': us.data['submitted_by'],
-                            'submitter_phone_no': us.data['submitter_phone_no'],
-                            'category': us.data['category'],
-                          });
-                          us.reference.delete();
-                        }
-                      }
+                            final QuerySnapshot result = await _firestore
+                                .collection('categories')
+                                .where('sender',
+                                    isEqualTo: widget.loggedinUser.email
+                                        .toString()
+                                        .toLowerCase())
+                                .limit(1)
+                                .getDocuments();
+                            final List<DocumentSnapshot> documents =
+                                result.documents;
+                            print(documents);
+                            String id;
+                            for (var r in documents) {
+                              id = r.documentID;
+                              print('haha');
+                            }
 
-                      final QuerySnapshot result = await _firestore
-                          .collection('categories')
-                          .where('sender',
-                              isEqualTo:
-                                  widget.loggedinUser.email.toString().toLowerCase())
-                          .limit(1)
-                          .getDocuments();
-                      final List<DocumentSnapshot> documents = result.documents;
-                      print(documents);
-                      String id;
-                      for (var r in documents) {
-                        id = r.documentID;
-                        print('haha');
-                      }
+                            await _firestore
+                                .collection('categories')
+                                .document(id)
+                                .delete();
 
-                      await _firestore
-                          .collection('categories')
-                          .document(id)
-                          .delete();
+                            await widget.loggedinUser.delete();
 
-                      await widget.loggedinUser.delete();
-
-                      Navigator.pushReplacement(
-                          context,
-                          PageTransition(
-                              type: PageTransitionType.leftToRight,
-                              child: welcome_screen()));
-                    } catch (e) {
-                      print(e);
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.leftToRight,
+                                    child: welcome_screen()));
+                          } catch (e) {
+                            print(e);
 //                    var alertDialog = AlertUser(
 //                      title: 'Oops!',
 //                      content:
@@ -271,11 +277,30 @@ class _tabState extends State<tab> {
 //                        builder: (context) {
 //                          return alertDialog;
 //                        });
-                    }
-                  },
-                ),
-              ],
-            )),
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Text(
+                            "\u00A9 Zine",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
             appBar: AppBar(
               backgroundColor: Colors.black87,
               bottom: TabBar(

@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primaryColor: Colors.teal,
       ),
-      title: 'NGO app',
+      title: 'Sanjeevani',
       routes: <String, WidgetBuilder>{
         '/choice': (BuildContext context) => new choice(),
         '/login': (BuildContext context) => new login(widget.cam),
