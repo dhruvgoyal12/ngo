@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ngouser/widgets/uploadTab1.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../welcome_screen.dart';
 import 'db_helper.dart';
 
 class homepage extends StatefulWidget {
@@ -73,9 +74,12 @@ class _homepageState extends State<homepage>
   void _signOut() {
     updateC1();
     FirebaseAuth.instance.signOut();
-    Navigator.pop(context);
+    //Navigator.pop(context);
     //Navigator.popAndPushNamed(context,'/choice');
-    Navigator.pushReplacementNamed(context, '/login');
+    Navigator.pushReplacement(
+            context,
+            PageTransition(
+                type: PageTransitionType.leftToRight, child: welcome_screen()));
     //Navigator.push(context, MaterialPageRoute(builder: (context) => choice()));
 
     //Navigator.of(context).pushReplacementNamed('/choice');

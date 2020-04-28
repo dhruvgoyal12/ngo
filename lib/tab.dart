@@ -47,10 +47,7 @@ class _tabState extends State<tab> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacement(
-            context,
-            PageTransition(
-                type: PageTransitionType.leftToRight, child: welcome_screen()));
+        
         return true;
       },
       child: Container(
@@ -192,7 +189,7 @@ class _tabState extends State<tab> {
                         context,
                         PageTransition(
                             type: PageTransitionType.leftToRight,
-                            child: LoginScreen()));
+                            child: welcome_screen()));
                   },
                 ),
                 ListTile(
@@ -260,7 +257,7 @@ class _tabState extends State<tab> {
                           context,
                           PageTransition(
                               type: PageTransitionType.leftToRight,
-                              child: LoginScreen()));
+                              child: welcome_screen()));
                     } catch (e) {
                       print(e);
 //                    var alertDialog = AlertUser(
