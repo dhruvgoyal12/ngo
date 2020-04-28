@@ -29,7 +29,7 @@ dependencies:
   path:
   fluttertoast: ^4.0.1
   firebase_storage:
-  font_awesome_flutter: ^8.4.0
+ # font_awesome_flutter: ^8.4.0
 #  firebase_analytics: ^5.0.6
 #  google_maps_flutter: ^0.5.25+3
   dotted_border: ^1.0.5

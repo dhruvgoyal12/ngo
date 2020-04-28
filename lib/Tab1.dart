@@ -76,7 +76,7 @@ class _Tab1State extends State<Tab1> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               StreamBuilder<QuerySnapshot>(
-                stream: _firestore.collection('requests').snapshots(),
+                stream: _firestore.collection('requests').orderBy('time',descending:true).snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final messages = snapshot.data.documents;
