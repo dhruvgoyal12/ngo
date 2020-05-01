@@ -33,91 +33,95 @@ class _RequestTabState extends State<RequestTab> {
     return Column(
       
       children: <Widget>[
-        StreamBuilder<QuerySnapshot>(
-          stream: _firestore
-              .collection('requests')
-              .orderBy('date', descending: true)
-              .snapshots(),
-          builder: (context, snapshot) {
-            snapa = snapshot;
-            if (snapshot.data == null) {
-              return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Center(
-                          child: Icon(Icons.error),
-                        ),
-                        Text("No Requests found!"),
-                      ],
-                    );
-                  });
-            } else {
-              docs = snapshot.data.documents;
-              //docs_data = snapshot.data[];
+        Expanded(
+                  child: StreamBuilder<QuerySnapshot>(
+            stream: _firestore
+                .collection('requests')
+                .orderBy('date', descending: true)
+                .snapshots(),
+            builder: (context, snapshot) {
+              snapa = snapshot;
+              if (snapshot.data == null) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Center(
+                            child: Icon(Icons.error),
+                          ),
+                          Text("No Requests found!"),
+                        ],
+                      );
+                    });
+              } else {
+                docs = snapshot.data.documents;
+                //docs_data = snapshot.data[];
 
-              /*List<Widget> requests = docs.map((doc) {
-          Requests(doc.data['latitude'], doc.data['longitude'], doc.data['img'],
-              doc.data['date']);
-        }).toList();*/
-              return ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: getItems(context, docs).length,
-                  itemBuilder: (context, index) {
-                    // String img = snapshot.data.hitsList[index].previewUrl;
-                    return getItems(context, docs)[index];
-                  });
-            }
-          },
+                /*List<Widget> requests = docs.map((doc) {
+            Requests(doc.data['latitude'], doc.data['longitude'], doc.data['img'],
+                doc.data['date']);
+          }).toList();*/
+                return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: getItems(context, docs).length,
+                    itemBuilder: (context, index) {
+                      // String img = snapshot.data.hitsList[index].previewUrl;
+                      return getItems(context, docs)[index];
+                    });
+              }
+            },
+          ),
         ),
-        StreamBuilder<QuerySnapshot>(
+        Expanded(
+                  child: StreamBuilder<QuerySnapshot>(
       stream: _firestore
-          .collection('requests_accepted')
-          .orderBy('time', descending: true)
-          .snapshots(),
+            .collection('requests_accepted')
+            .orderBy('time', descending: true)
+            .snapshots(),
       builder: (context, snapshot) {
-        snapa = snapshot;
-        if (snapshot.data == null) {
-          return ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: 1,
-              itemBuilder: (context, index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Center(
-                      child: Icon(Icons.error),
-                    ),
-                    Text("No Requests found!"),
-                  ],
-                );
-              });
-        } else {
-          docs = snapshot.data.documents;
-          //docs_data = snapshot.data[];
+          snapa = snapshot;
+          if (snapshot.data == null) {
+            return ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Center(
+                        child: Icon(Icons.error),
+                      ),
+                      Text("No Requests found!"),
+                    ],
+                  );
+                });
+          } else {
+            docs = snapshot.data.documents;
+            //docs_data = snapshot.data[];
 
-          /*List<Widget> requests = docs.map((doc) {
+            /*List<Widget> requests = docs.map((doc) {
       Requests(doc.data['latitude'], doc.data['longitude'], doc.data['img'],
       doc.data['date']);
     }).toList();*/
-          return ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: getItems1(context, docs).length,
-              itemBuilder: (context, index) {
-                // String img = snapshot.data.hitsList[index].previewUrl;
-                return getItems1(context, docs)[index];
-              });
-        }
+            return ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: getItems1(context, docs).length,
+                itemBuilder: (context, index) {
+                  // String img = snapshot.data.hitsList[index].previewUrl;
+                  return getItems1(context, docs)[index];
+                });
+          }
       },
     ),
+        ),
       ],
     );
   }

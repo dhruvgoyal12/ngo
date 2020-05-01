@@ -27,6 +27,12 @@ class _RequestTab1State extends State<RequestTab1> {
   //);
   //final FirebaseAuth _auth = FirebaseAuth.instance;
 //List nada=[Text('No requests found')];
+  void closeRequest(op) {
+    setState(() {
+      op = 0.1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     uidg = widget.uid;
@@ -65,10 +71,10 @@ class _RequestTab1State extends State<RequestTab1> {
           return ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              itemCount: getItems(context, docs).length,
+              itemCount: getItems(context, docs, closeRequest).length,
               itemBuilder: (context, index) {
                 // String img = snapshot.data.hitsList[index].previewUrl;
-                return getItems(context, docs)[index];
+                return getItems(context, docs, closeRequest)[index];
               });
         }
       },
@@ -76,10 +82,11 @@ class _RequestTab1State extends State<RequestTab1> {
   }
 }
 
-List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
+List<Widget> getItems(
+    BuildContext context, List<DocumentSnapshot> docs, closeRequest) {
   // int i = -1;
   return docs.map((doc) {
-    //i++;
+    double op = 1;
     String latitude,
         longitude,
         date,
@@ -107,119 +114,227 @@ List<Widget> getItems(BuildContext context, List<DocumentSnapshot> docs) {
     img = doc.data['img_url'].toString();
     //address = doc.data['address'].toString();
     return me
-        ? GestureDetector(
-            onLongPress: () {
-              _settingModalBottomSheet(
-                context,
-                doc,
-                img,
-                date,
-                landmark,
-                instructions,
-                status,
-                food,
-                medicine,
-                women,
-                clothes,
-                children,
-              );
-            },
-            child: Card(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(5),
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(img),
-                      backgroundColor: Colors.transparent,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+        ? Stack(
+            children: <Widget>[
+              Opacity(
+                opacity: op,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onLongPress: () {
+                    _settingModalBottomSheet(
+                      context,
+                      doc,
+                      img,
+                      date,
+                      address,
+                      instructions,
+                      status,
+                      food,
+                      medicine,
+                      women,
+                      clothes,
+                      children,
+                    );
+                  },
+                  child: Card(
+                    margin: EdgeInsets.all(10),
+                    child: Row(
                       children: <Widget>[
-                        SizedBox(
-                          height: 3,
-                        ),
-                        FittedBox(
-                          child: Text(
-                            "Date :   " + date.substring(0,(date.indexOf(' '))),
-                            style: TextStyle(
-                              fontFamily: 'Lato',
-                              fontSize: 15,
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Hero(
+                            tag: "abcd",
+                            child: GestureDetector(
+                              onTap: op == 0.1
+                                  ? null
+                                  : () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (ctx) {
+                                            return Hero(
+                                              tag: "abcd",
+                                              child: AlertDialog(
+                                                title: FittedBox(
+                                                  child: Text(
+                                                    "Complete Request.....?",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'Montserrat'),
+                                                  ),
+                                                ),
+                                                content: SingleChildScrollView(
+                                                  child: ListBody(
+                                                    children: <Widget>[
+                                                      Container(
+                                                        child:
+                                                            Image.network(img),
+                                                      ),
+                                                      RaisedButton(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          30)),
+                                                          //disabledColor: Colors.transparent,
+                                                          //disabledTextColor: Colors.transparent,
+                                                          disabledElevation: 0,
+                                                          color: Colors.green,
+                                                          // disabledColor: Colors.green,
+                                                          child: Text(
+                                                              'Complete',
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 15,
+                                                                color: Colors
+                                                                    .white,
+                                                              )),
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                            closeRequest(op);
+                                                            //op=0.1;
+                                                          })
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          });
+                                    },
+                              child: CircleAvatar(
+                                radius: 50,
+                                backgroundImage: NetworkImage(img),
+                                backgroundColor: Colors.transparent,
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          width: 4,
                         ),
-                        /*FittedBox(
-                          child: Text(
-                            "Instructions:" + instructions,
-                            style: TextStyle(fontFamily: 'Lato', fontSize: 15),
-                          ),
-                        ),*/
-                        FittedBox(
-                          child: Text(
-                            "Location : " +
-                                address.substring(0, address.indexOf(',')),
-                            style: TextStyle(
-                              fontFamily: 'Lato',
-                              fontSize: 14,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Card(
-                                color: Colors.green,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(7.0),
-                                  child: Text(
-                                    "ACCEPTED",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      //fontWeight: FontWeight.bold,
-                                    ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 3,
+                              ),
+                              FittedBox(
+                                child: Text(
+                                  "Date :   " +
+                                      date.substring(0, (date.indexOf(' '))),
+                                  style: TextStyle(
+                                    fontFamily: 'Lato',
+                                    fontSize: 15,
                                   ),
-                                )),
-                            IconButton(
-                              icon: Icon(Icons.more_vert),
-                              onPressed: () {
-                                _settingModalBottomSheet(
-                                  context,
-                                  doc,
-                                  img,
-                                  date,
-                                  address,
-                                  instructions,
-                                  status,
-                                  food,
-                                  medicine,
-                                  women,
-                                  clothes,
-                                  children,
-                                );
-                              },
-                            )
-                          ],
-                        )
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              /*FittedBox(
+                                child: Text(
+                                  "Instructions:" + instructions,
+                                  style: TextStyle(fontFamily: 'Lato', fontSize: 15),
+                                ),
+                              ),*/
+                              FittedBox(
+                                child: Text(
+                                  "Location : " +
+                                      address.substring(
+                                          0, address.indexOf(',')),
+                                  style: TextStyle(
+                                    fontFamily: 'Lato',
+                                    fontSize: 14,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Card(
+                                      color: Colors.green,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(7.0),
+                                        child: Text(
+                                          "ACCEPTED",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            //fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      )),
+                                  IconButton(
+                                    icon: Icon(Icons.more_vert),
+                                    onPressed: op == 0.1
+                                        ? null
+                                        : () {
+                                            _settingModalBottomSheet(
+                                              context,
+                                              doc,
+                                              img,
+                                              date,
+                                              address,
+                                              instructions,
+                                              status,
+                                              food,
+                                              medicine,
+                                              women,
+                                              clothes,
+                                              children,
+                                            );
+                                          },
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
+              if (op == 0.1)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 16,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 3,
+                        ),
+                        Card(
+                          elevation: 10,
+                          child: Container(
+                            padding: EdgeInsets.all(3),
+                            child: Text(
+                              "COMPLETED",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.bold,
+                                  //fontStyle: FontStyle.italic,
+                                  color: Colors.green[800]),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+            ],
           )
         : Container();
   }).toList();
