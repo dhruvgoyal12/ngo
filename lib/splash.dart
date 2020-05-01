@@ -98,7 +98,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                 auth: Auth(),
               )));
     }
-dispose();
+//dispose();
   }
 
   @override
