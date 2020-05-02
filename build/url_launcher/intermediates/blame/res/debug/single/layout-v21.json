@@ -1,18 +1,18 @@
 [
     {
-        "merged": "/home/rushil/Work/AndroidStudioProjects/ngo/build/url_launcher/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
-        "source": "/home/rushil/.gradle/caches/transforms-2/files-2.1/9dacf9516413cf5e5b34c6b4508340e4/core-1.0.0/res/layout-v21/notification_action_tombstone.xml"
+        "merged": "C:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\url_launcher\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\IT\\.gradle\\caches\\transforms-2\\files-2.1\\9dacf9516413cf5e5b34c6b4508340e4\\core-1.0.0\\res\\layout-v21\\notification_template_icon_group.xml"
     },
     {
-        "merged": "/home/rushil/Work/AndroidStudioProjects/ngo/build/url_launcher/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
-        "source": "/home/rushil/.gradle/caches/transforms-2/files-2.1/9dacf9516413cf5e5b34c6b4508340e4/core-1.0.0/res/layout-v21/notification_template_custom_big.xml"
+        "merged": "C:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\url_launcher\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\IT\\.gradle\\caches\\transforms-2\\files-2.1\\9dacf9516413cf5e5b34c6b4508340e4\\core-1.0.0\\res\\layout-v21\\notification_action.xml"
     },
     {
-        "merged": "/home/rushil/Work/AndroidStudioProjects/ngo/build/url_launcher/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
-        "source": "/home/rushil/.gradle/caches/transforms-2/files-2.1/9dacf9516413cf5e5b34c6b4508340e4/core-1.0.0/res/layout-v21/notification_template_icon_group.xml"
+        "merged": "C:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\url_launcher\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\IT\\.gradle\\caches\\transforms-2\\files-2.1\\9dacf9516413cf5e5b34c6b4508340e4\\core-1.0.0\\res\\layout-v21\\notification_action_tombstone.xml"
     },
     {
-        "merged": "/home/rushil/Work/AndroidStudioProjects/ngo/build/url_launcher/intermediates/res/merged/debug/layout-v21/notification_action.xml",
-        "source": "/home/rushil/.gradle/caches/transforms-2/files-2.1/9dacf9516413cf5e5b34c6b4508340e4/core-1.0.0/res/layout-v21/notification_action.xml"
+        "merged": "C:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\url_launcher\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\IT\\.gradle\\caches\\transforms-2\\files-2.1\\9dacf9516413cf5e5b34c6b4508340e4\\core-1.0.0\\res\\layout-v21\\notification_template_custom_big.xml"
     }
 ]
