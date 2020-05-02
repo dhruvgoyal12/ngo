@@ -10,6 +10,21 @@ class detailed_view2 extends StatelessWidget {
   static String id = "detailed_view2";
 
   detailed_view2({Key key, @required this.document}) : super(key: key);
+
+  String addLines(String addr) {
+    int stIndex = 0;
+    int endIndex = 50;
+    String a = '';
+    while (endIndex < addr.length) {
+      print('hello');
+      a += addr.substring(stIndex, endIndex) + '\n';
+      stIndex = endIndex + 1;
+      endIndex = stIndex + 50;
+    }
+    a += addr.substring(stIndex);
+    return a;
+  }
+
   @override
   Widget build(BuildContext context) {
     String address = document.data['address'],
@@ -21,6 +36,7 @@ class detailed_view2 extends StatelessWidget {
         submitter_phone_no = document.data['submitter_phone_no'],
         category = document.data['category'],
         coordinate = document.data['coordinate'];
+    String addr = addLines(address);
 
     return Scaffold(
         body: Column(
@@ -92,7 +108,7 @@ class detailed_view2 extends StatelessWidget {
                                 color: Colors.green,
                               ),
                             ),
-                            Text(address,
+                            Text(addr,
                                 style: TextStyle(
                                     color: Colors.green,
                                     fontWeight: FontWeight.bold,
@@ -163,6 +179,7 @@ class detailed_view2 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               RoundedButton(
+                color: Colors.black,
                 text: 'Completed',
                 onPressed: () {
                   document.reference.delete();
@@ -173,6 +190,7 @@ class detailed_view2 extends StatelessWidget {
                 height: 10,
               ),
               RoundedButton(
+                color: Colors.black,
                 text: 'Cancel',
                 onPressed: () {
                   _firestore.collection('requests').add({
