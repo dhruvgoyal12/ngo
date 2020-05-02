@@ -27,212 +27,180 @@ class detailed_view extends StatelessWidget {
         category = document.data['category'],
         coordinate = document.data['coordinate'];
     return Scaffold(
-      backgroundColor: Colors.white30,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        body: Column(
           children: <Widget>[
-            Material(
-                elevation: 10.0,
-                child:
-                    Stack(alignment: Alignment.bottomRight, children: <Widget>[
-                  Image.network(
-                    img_url,
-                    height: 300.0,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
-                  ),
-                  Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Material(
-                          elevation: 5.0,
-                          color: Colors.white30.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(100.0),
-                          child: MaterialButton(
-                            onPressed: () {
-                              launch(
-                                  'https://www.google.com/maps/dir/?api=1&destination=$coordinate');
-                            },
-                            minWidth: 10.0,
-                            height: 42.0,
-                            child: Icon(Icons.location_on),
-                          ))),
-                ])),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 5.0),
-                    child: Material(
-                      borderRadius: BorderRadius.circular(5.0),
-                      elevation: 10.0,
-                      color: Colors.white30.withOpacity(0.1),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('$note.\n',
-                                style: TextStyle(
-                                  //fontWeight: FontWeight.bold,
-                                  color: Colors.white70,
-                                  fontSize: 17.0,
-                                )),
-                            Text(time,
-                                style: TextStyle(
-                                  color: Colors.white70,
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-//            Container(
-//                height: 1.0,
-//                decoration: BoxDecoration(
-//                  border: Border.all(
-//                    color: Colors.grey,
-//                    width: 1.4,
-//                  ),
-//                )),
-            Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 8.0, left: 5.0, right: 5.0),
-              child: Material(
-                borderRadius: BorderRadius.circular(5.0),
-                elevation: 10.0,
-                color: Colors.white30.withOpacity(0.1),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text("Address: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                            fontSize: 17.0,
-                          )),
-                      Expanded(
-                        child: Text(address,
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 17.0,
-                            )),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 8.0, left: 5.0, right: 5.0),
-              child: Material(
-                borderRadius: BorderRadius.circular(5.0),
-                elevation: 10.0,
-                color: Colors.white30.withOpacity(0.1),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    children: <Widget>[
-                      Text("Submitted by: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                            fontSize: 17.0,
-                          )),
-                      Expanded(
-                        child: Text(submitted_by,
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 17.0,
-                            )),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 8.0, left: 5.0, right: 5.0),
-              child: Material(
-                borderRadius: BorderRadius.circular(5.0),
-                elevation: 10.0,
-                color: Colors.white30.withOpacity(0.1),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    children: <Widget>[
-                      Text("Phone NO. ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                            fontSize: 17.0,
-                          )),
-                      Expanded(
-                          child: Text(submitter_phone_no,
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 17.0,
-                              )))
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
+            Expanded(
+              child: ListView(
                 children: <Widget>[
-                  Expanded(
-                    child: rounded_button(
-                        onPressed: () {
-                          _firestore.collection('requests_accepted').add({
-                            'img_url': img_url,
-                            'city': location,
-                            'address': address,
-                            'note': note,
-                            'time': time,
-                            'submitted_by': submitted_by,
-                            'submitter_phone_no': submitter_phone_no,
-                            'accepted_by': loggedInUser,
-                            'category': category,
-                            'coordinate': coordinate,
-                            'Shelter':document.data['Shelter'],
-                            'Clothes':document.data['Clothes'],
-                            'Food':document.data['Food'],
-                            'Others':document.data['Others'],
-                            'Women care':document.data['Women care'],
-                            'img':document.data['img'],
-                            'landmark':document.data['landmark'],
-                            'latitude':document.data['latitude'],
-                            'longitude':document.data['longitude'],
-                            'status':document.data['status'],
-                            'time':document.data['time'],
-                            'user_id':document.data['user_id'],
-                          });
-                          document.reference.delete();
-                          Navigator.pop(context);
-                        },
-                        text: ("Accept"),
-                        color: Colors.lightGreen
-//                      color: Colors.green,
-//                      shape: RoundedRectangleBorder(
-//                          borderRadius: BorderRadius.circular(20.0)),
-                        ),
+                  Column(
+                    children: <Widget>[
+                      Stack(
+                        children: <Widget>[
+                          Container(
+                            height: MediaQuery.of(context).size.height - 400,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(img_url), fit: BoxFit.cover),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(Icons.arrow_back_ios),
+                                color: Colors.white,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Material(
+                                    type: MaterialType.circle,
+                                    elevation: 5.0,
+                                    color: Colors.white,
+                                    //borderRadius: BorderRadius.circular(100.0),
+                                    child: MaterialButton(
+                                      onPressed: () {
+                                        launch(
+                                            'https://www.google.com/maps/dir/?api=1&destination=$coordinate');
+                                      },
+                                      minWidth: 10.0,
+                                      height: 42.0,
+                                      child: Icon(
+                                        Icons.location_on,
+                                        color: Colors.black,
+                                      ),
+                                    )),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 5),
+                                      child: Icon(
+                                        Icons.location_on,
+                                        size: 20,
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                    Text(address,
+                                        style: TextStyle(
+                                            color: Colors.green,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15))
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 5),
+                                      child: Icon(
+                                        Icons.person,
+                                        size: 20,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Text('Submitted by: $submitted_by ',
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15))
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: Center(
+                                  child: Text(
+                                    'Urgently Needed Help',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: Text(
+                                  note,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500, fontSize: 15),
+                                ),
+                              ),
+                            ],
+                          ))
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  RoundedButton(
+                    text: 'Accept',
+                    onPressed: () {
+                      _firestore.collection('requests_accepted').add({
+                        'img_url': img_url,
+                        'city': location,
+                        'address': address,
+                        'note': note,
+                        'time': time,
+                        'submitted_by': submitted_by,
+                        'submitter_phone_no': submitter_phone_no,
+                        'accepted_by': loggedInUser,
+                        'category': category,
+                        'coordinate': coordinate,
+                        'Shelter': document.data['Shelter'],
+                        'Clothes': document.data['Clothes'],
+                        'Food': document.data['Food'],
+                        'Others': document.data['Others'],
+                        'Women care': document.data['Women care'],
+                        'img': document.data['img'],
+                        'landmark': document.data['landmark'],
+                        'latitude': document.data['latitude'],
+                        'longitude': document.data['longitude'],
+                        'status': document.data['status'],
+                        'time': document.data['time'],
+                        'user_id': document.data['user_id'],
+                      });
+                      document.reference.delete();
+                      Navigator.pop(context);
+                    },
                   ),
                 ],
               ),
             )
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
