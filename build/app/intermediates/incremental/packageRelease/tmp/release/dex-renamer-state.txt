@@ -1,4 +1,0 @@
-#Tue Apr 28 21:15:49 IST 2020
-base.0=C\:\\Users\\rushi\\Work\\AndroidStudioProjects\\ngo\\build\\app\\intermediates\\transforms\\r8\\release\\0\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

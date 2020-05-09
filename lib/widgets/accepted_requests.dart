@@ -302,7 +302,7 @@ List<Widget> getItems(
                   ),
                 ),
               ),
-              if (op == 0.1)
+              (op == 0.1)?
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -333,7 +333,7 @@ List<Widget> getItems(
                       ],
                     ),
                   ],
-                )
+                ):Container()
             ],
           )
         : Container();

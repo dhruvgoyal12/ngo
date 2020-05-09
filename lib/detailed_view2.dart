@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ngo/Roundedbutton.dart';
-import 'package:ngo/rounded_button.dart';
+//import 'package:ngo/Roundedbutton.dart';
+//import 'package:ngo/rounded_button.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'Roundedbutton.dart';
 
 class detailed_view2 extends StatelessWidget {
   final _firestore = Firestore.instance;

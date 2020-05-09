@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\url_launcher\\intermediates\\res\\merged\\debug\\values-ml\\values-ml.xml",
+            "outputFile": "/home/rushil/Work/AndroidStudioProjects/ngo/build/url_launcher/intermediates/incremental/mergeDebugResources/merged.dir/values-ml/values-ml.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\IT\\.gradle\\caches\\transforms-2\\files-2.1\\9dacf9516413cf5e5b34c6b4508340e4\\core-1.0.0\\res\\values-ml\\values-ml.xml",
+                    "source": "/home/rushil/.gradle/caches/transforms-2/files-2.1/e74a1afd426538a36f0d6b21d498af68/core-1.1.0/res/values-ml/values-ml.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -16,10 +16,10 @@
             ]
         },
         {
-            "outputFile": "C:\\Projects\\Zine\\TroubleShoot\\ngo\\build\\url_launcher\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ml\\values-ml.xml",
+            "outputFile": "/home/rushil/Work/AndroidStudioProjects/ngo/build/url_launcher/intermediates/res/merged/debug/values-ml/values-ml.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\IT\\.gradle\\caches\\transforms-2\\files-2.1\\9dacf9516413cf5e5b34c6b4508340e4\\core-1.0.0\\res\\values-ml\\values-ml.xml",
+                    "source": "/home/rushil/.gradle/caches/transforms-2/files-2.1/e74a1afd426538a36f0d6b21d498af68/core-1.1.0/res/values-ml/values-ml.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
