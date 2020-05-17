@@ -7,6 +7,8 @@ final _auth = FirebaseAuth.instance;
 String loggedInUser;
 
 class Tab2 extends StatefulWidget {
+  final cam;
+  Tab2(this.cam);
   static String id = "Tab2";
   @override
   _Tab2State createState() => _Tab2State();
@@ -35,6 +37,7 @@ class _Tab2State extends State<Tab2> {
 
   @override
   Widget build(BuildContext context) {
+    final cam=widget.cam;
     return Scaffold(
       backgroundColor: Colors.black12,
       body: SafeArea(
@@ -131,6 +134,7 @@ class _Tab2State extends State<Tab2> {
                                                       builder: (context) =>
                                                           detailed_view2(
                                                             document: message,
+                                                            cam:cam,
                                                           )));
                                             },
                                             color: Colors.lightBlueAccent,
