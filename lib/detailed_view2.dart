@@ -10,8 +10,9 @@ class detailed_view2 extends StatelessWidget {
   final _firestore = Firestore.instance;
   DocumentSnapshot document;
   static String id = "detailed_view2";
+  final cam;
 
-  detailed_view2({Key key, @required this.document}) : super(key: key);
+  detailed_view2({Key key, @required this.document,this.cam}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -174,8 +175,9 @@ class detailed_view2 extends StatelessWidget {
                 color: Colors.black,
                 text: 'Completed',
                 onPressed: () {
-                  document.reference.delete();
-                  Navigator.pop(context);
+                   _settingModalBottomSheet(context, document.data['uid'], cam);
+//                   document.reference.delete();
+//                   Navigator.pop(context);
                 },
               ),
               SizedBox(
@@ -220,3 +222,75 @@ class detailed_view2 extends StatelessWidget {
     ));
   }
 }
+void _settingModalBottomSheet(context, s, cam) {
+  int count;
+  //DocumentSnapshot documents = document;
+  showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Scaffold(
+            appBar: AppBar(
+              title: Text('Close Request'),
+              backgroundColor: Colors.black,
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(children: <Widget>[
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(
+                      "Complete request by sending the photograph of the person you helped to the sender of this request"),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Material(
+                    elevation: 5.0,
+                    color: Colors.lightBlueAccent,
+                    //borderRadius: BorderRadius.circular(32.0),
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(new MaterialPageRoute(builder: (context) {
+                          return new ngo_picture(cam, s);
+                        }));
+                        //Navigator.pushReplacementNamed(context, '/ngo_pic');
+                      },
+                      minWidth: 400,
+                      height: 35.0,
+                      child: Text(
+                        'Close With a photo',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40.0,
+                  ),
+                  Material(
+                    elevation: 5.0,
+                    color: Colors.lightBlueAccent,
+                    //borderRadius: BorderRadius.circular(32.0),
+                    child: MaterialButton(
+                      onPressed: () {
+                        //document.reference.delete();
+                        count = 0;
+                        Navigator.popUntil(context, (route) {
+                          return count++ == 2;
+                        });
+                      },
+                      minWidth: 400,
+                      height: 35.0,
+                      child: Text(
+                        'Close Anyway',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  )
+                ]),
+              ),
+            ));
+      });
+}
+
