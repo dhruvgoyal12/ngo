@@ -16,7 +16,8 @@ import 'package:page_transition/page_transition.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class tab extends StatefulWidget {
-  tab({this.loggedinUser});
+  final cam;
+  tab({this.loggedinUser,this.cam});
   final loggedinUser;
 
   @override
@@ -45,6 +46,8 @@ class _tabState extends State<tab> {
 
   @override
   Widget build(BuildContext context) {
+    final cam=widget.cam;
+    final cam=widget.cam;
     return WillPopScope(
       onWillPop: () async {
         return true;
@@ -259,11 +262,8 @@ class _tabState extends State<tab> {
 
                             await widget.loggedinUser.delete();
 
-                            Navigator.pushReplacement(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.leftToRight,
-                                    child: welcome_screen()));
+           
+                             Navigator.pushReplacementNamed(context, '/wel');
                           } catch (e) {
                             print(e);
 //                    var alertDialog = AlertUser(
@@ -335,7 +335,7 @@ class _tabState extends State<tab> {
             ),
             body: Container(
               child: TabBarView(
-                children: [Tab1(), Tab2()],
+                children: [Tab1(), Tab2(this.cam)],
               ),
             ),
           ),
