@@ -11,6 +11,8 @@ import 'user.dart';
 
 class welcome_screen extends StatelessWidget {
   static String id = "welcome_screen";
+  final cam;
+  welcome_screen(this.cam);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -102,6 +104,7 @@ class welcome_screen extends StatelessWidget {
                                       type: PageTransitionType.rightToLeft,
                                       child: RootPage(
                                         auth: Auth(),
+                                        cam:cam,
                                       )));
                             }),
                       ),
