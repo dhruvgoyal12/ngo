@@ -7,7 +7,8 @@ import 'authentication.dart';
 import 'tab.dart';
 
 class RootPage extends StatefulWidget {
-  RootPage({this.auth});
+  final cam;
+  RootPage({this.auth,this.cam});
   final Auth auth;
   @override
   _RootPageState createState() => _RootPageState();
@@ -63,6 +64,7 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
+    final cam=widget.cam;
     switch (_authStatus) {
       case AuthStatus.notSignedIn:
         return LoginScreen(
@@ -72,6 +74,7 @@ class _RootPageState extends State<RootPage> {
       case AuthStatus.signedIn:
         return tab(
           loggedinUser: loggedinUser,
+          cam:cam,
         );
     }
   }
