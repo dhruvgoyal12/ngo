@@ -49,6 +49,7 @@ class _MyAppState extends State<MyApp> {
         '/choice': (BuildContext context) => new choice(),
         '/login': (BuildContext context) => new login(widget.cam),
         //'/page1':(BuildContext context)=>new page1(),
+        '/wel': (BuildContext context) => new welcome_screen(widget.cam),
         '/homepage': (BuildContext context) => new homepage(
             null,
             null,
