@@ -75,16 +75,17 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
 //    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
 //      return LoginScreen();
-      return Navigator.pushReplacement(
-          context,
-          PageTransition(type: PageTransitionType.fade, child: welcome_screen()
+      return Navigator.pushReplacementNamed(context, '/wel');
+//         Navigator.pushReplacement(
+//           context,
+//           PageTransition(type: PageTransitionType.fade, child: welcome_screen()));
+                         
 //           RootPage(
 //               auth: Auth(),
 //             )
 //                LoginScreen(
 //              auth: Auth(),
 //            )
-          ));
     } else if (status.first['value'] == 1) {
       print('going to user');
       Navigator.of(context).pushReplacementNamed('/homepage');
