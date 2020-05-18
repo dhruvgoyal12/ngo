@@ -98,7 +98,7 @@ class DisplayPictureScreen extends StatelessWidget {
     await uploadTask.onComplete;
     var url = storagereference.getDownloadURL();
     img_url = url.toString();
-    _firestore.collection('requests_accepted').add({
+    _firestore.collection('requests_completed').add({
       'img_url': img_url,
       'uid':s,
     });
