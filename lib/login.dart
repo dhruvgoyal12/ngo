@@ -20,7 +20,8 @@ const Color iconColor = Colors.white;
 const Color iconTapped = Colors.blue;
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({this.auth, this.onSignedin});
+  final cam;
+  LoginScreen({this.auth, this.onSignedin,this.cam});
   final Auth auth;
   final VoidCallback onSignedin;
   @override
@@ -39,6 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cam=widget.cam;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: ModalProgressHUD(
@@ -181,6 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     child: tab(
                                                       loggedinUser:
                                                           loggedinUser,
+                                                      cam:cam,
                                                     )));
                                           } else {
                                             Navigator.push(
