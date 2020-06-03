@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
             false),
       },
       debugShowCheckedModeBanner: false,
-      home: Splash(),
+      home: Splash(widget.cam),
     );
   }
 }
