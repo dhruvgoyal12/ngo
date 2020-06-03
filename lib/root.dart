@@ -70,6 +70,7 @@ class _RootPageState extends State<RootPage> {
         return LoginScreen(
           auth: widget.auth,
           onSignedin: _signedIn,
+          cam:cam,
         );
       case AuthStatus.signedIn:
         return tab(
