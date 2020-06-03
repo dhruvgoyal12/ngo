@@ -16,6 +16,8 @@ import 'authentication.dart';
 import './widgets/db_helper.dart';
 
 class Splash extends StatefulWidget {
+   final cam;
+  Splash({this.cam});
   @override
   _SplashState createState() => _SplashState();
 }
@@ -97,6 +99,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
               type: PageTransitionType.rightToLeft,
               child: RootPage(
                 auth: Auth(),
+                cam:cam
               )));
     }
 //dispose();
@@ -111,6 +114,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final cam=widget.cam;
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
