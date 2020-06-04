@@ -90,7 +90,7 @@ class DisplayPictureScreen extends StatelessWidget {
   String img_url;
   int count;
   DocumentSnapshot Doc;
-  Future uploadFile() async {
+  Future uploadFile(String uid) async {
     String name = basename(imagePath);
     StorageReference storagereference =
         FirebaseStorage.instance.ref().child(name);
@@ -100,7 +100,7 @@ class DisplayPictureScreen extends StatelessWidget {
     img_url = url.toString();
     _firestore.collection('requests_completed').add({
       'img_url': img_url,
-      'uid':s,
+      'uid':uid,
     });
   }
 
@@ -121,7 +121,7 @@ class DisplayPictureScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(32.0),
                 child: MaterialButton(
                   onPressed: () {
-                    uploadFile();
+                    uploadFile(s);
                     print(s);
                     count = 0;
                     Navigator.popUntil(context, (route) {
