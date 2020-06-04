@@ -93,7 +93,7 @@ class DisplayPictureScreen extends StatelessWidget {
   Future uploadFile() async {
     String name = basename(imagePath);
     StorageReference storagereference =
-        FirebaseStorage.instance.ref().child(name);
+        FirebaseStorage.instance.ref().child("Images/$name");
     StorageUploadTask uploadTask = storagereference.putFile(File(imagePath));
     await uploadTask.onComplete;
     var url = storagereference.getDownloadURL();
