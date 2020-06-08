@@ -77,7 +77,7 @@ class _homepageState extends State<homepage>
     Navigator.pushReplacement(
         context,
         PageTransition(
-            type: PageTransitionType.leftToRight, child: welcome_screen()));
+            type: PageTransitionType.leftToRight, child: welcome_screen(widget.cam)));
     //Navigator.push(context, MaterialPageRoute(builder: (context) => choice()));
 
     //Navigator.of(context).pushReplacementNamed('/choice');

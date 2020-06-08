@@ -151,53 +151,78 @@ List<Widget> getItems(
                                       showDialog(
                                           context: context,
                                           builder: (ctx) {
-                                            return Hero(
-                                              tag: "abcd",
-                                              child: AlertDialog(
-                                                title: FittedBox(
-                                                  child: Text(
-                                                    "Complete Request.....?",
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            'Montserrat'),
-                                                  ),
+                                            return AlertDialog(
+                                              title: FittedBox(
+                                                child: Text(
+                                                  "Complete Request.....?",
+                                                  style: TextStyle(
+                                                      fontFamily: 'Montserrat'),
                                                 ),
-                                                content: SingleChildScrollView(
-                                                  child: ListBody(
-                                                    children: <Widget>[
-                                                      Container(
-                                                        child:
-                                                            Image.network(img),
-                                                      ),
-                                                      RaisedButton(
-                                                          shape: RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          30)),
-                                                          //disabledColor: Colors.transparent,
-                                                          //disabledTextColor: Colors.transparent,
-                                                          disabledElevation: 0,
-                                                          color: Colors.green,
-                                                          // disabledColor: Colors.green,
-                                                          child: Text(
-                                                              'Complete',
-                                                              style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 15,
-                                                                color: Colors
-                                                                    .white,
-                                                              )),
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                            closeRequest(op);
-                                                            //op=0.1;
-                                                          })
-                                                    ],
-                                                  ),
+                                              ),
+                                              content: SingleChildScrollView(
+                                                child: ListBody(
+                                                  children: <Widget>[
+                                                    // Container(
+                                                    //   child:
+                                                    //       Image.network(img),
+                                                    // ),
+                                                    StreamBuilder<
+                                                        QuerySnapshot>(
+                                                      stream: _firestore
+                                                          .collection(
+                                                              'requests_completed')
+                                                          .snapshots(),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        snapa = snapshot;
+                                                        if (snapshot.data ==
+                                                            null) {
+                                                          return Text(
+                                                              "No image uploaded");
+                                                        } else {
+                                                          docs = snapshot
+                                                              .data.documents;
+                                                          print("img received: " +
+                                                              docs[1].data[
+                                                                  'img_url']);
+                                                          return CircleAvatar(
+                                                              radius: 100,
+                                                              backgroundImage:
+                                                                  NetworkImage(docs[
+                                                                          0]
+                                                                      .data[
+                                                                          'img_url']
+                                                                      .toString()));
+                                                        }
+                                                      },
+                                                    ),
+                                                    RaisedButton(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30)),
+                                                        //disabledColor: Colors.transparent,
+                                                        //disabledTextColor: Colors.transparent,
+                                                        disabledElevation: 0,
+                                                        color: Colors.green,
+                                                        // disabledColor: Colors.green,
+                                                        child: Text('Complete',
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 15,
+                                                              color:
+                                                                  Colors.white,
+                                                            )),
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                          closeRequest(op);
+                                                          //op=0.1;
+                                                        })
+                                                  ],
                                                 ),
                                               ),
                                             );
@@ -302,38 +327,39 @@ List<Widget> getItems(
                   ),
                 ),
               ),
-              (op == 0.1)?
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 16,
-                    ),
-                    Row(
+              (op == 0.1)
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         SizedBox(
-                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.height / 16,
                         ),
-                        Card(
-                          elevation: 10,
-                          child: Container(
-                            padding: EdgeInsets.all(3),
-                            child: Text(
-                              "COMPLETED",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.bold,
-                                  //fontStyle: FontStyle.italic,
-                                  color: Colors.green[800]),
+                        Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 3,
                             ),
-                          ),
+                            Card(
+                              elevation: 10,
+                              child: Container(
+                                padding: EdgeInsets.all(3),
+                                child: Text(
+                                  "COMPLETED",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.bold,
+                                      //fontStyle: FontStyle.italic,
+                                      color: Colors.green[800]),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                  ],
-                ):Container()
+                    )
+                  : Container()
             ],
           )
         : Container();

@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'Roundedbutton.dart';
+import 'ngoPicture.dart';
 
 class detailed_view2 extends StatelessWidget {
   final _firestore = Firestore.instance;
@@ -12,7 +13,8 @@ class detailed_view2 extends StatelessWidget {
   static String id = "detailed_view2";
   final cam;
 
-  detailed_view2({Key key, @required this.document,this.cam}) : super(key: key);
+  detailed_view2({Key key, @required this.document, this.cam})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +177,8 @@ class detailed_view2 extends StatelessWidget {
                 color: Colors.black,
                 text: 'Completed',
                 onPressed: () {
-                   _settingModalBottomSheet(context, document.data['uid'], cam, document);
+                  _settingModalBottomSheet(
+                      context, document.data['uid'], cam, document);
 //                   document.reference.delete();
 //                   Navigator.pop(context);
                 },
@@ -222,6 +225,7 @@ class detailed_view2 extends StatelessWidget {
     ));
   }
 }
+
 void _settingModalBottomSheet(context, s, cam, document) {
   int count;
   //DocumentSnapshot documents = document;
@@ -293,4 +297,3 @@ void _settingModalBottomSheet(context, s, cam, document) {
             ));
       });
 }
-

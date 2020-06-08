@@ -47,7 +47,7 @@ class _tabState extends State<tab> {
   @override
   Widget build(BuildContext context) {
     final cam=widget.cam;
-    final cam=widget.cam;
+    //final cam=widget.cam;
     return WillPopScope(
       onWillPop: () async {
         return true;
@@ -195,7 +195,7 @@ class _tabState extends State<tab> {
                               context,
                               PageTransition(
                                   type: PageTransitionType.leftToRight,
-                                  child: welcome_screen()));
+                                  child: welcome_screen(widget.cam)));
                         },
                       ),
                       ListTile(
@@ -335,7 +335,7 @@ class _tabState extends State<tab> {
             ),
             body: Container(
               child: TabBarView(
-                children: [Tab1(), Tab2(this.cam)],
+                children: [Tab1(), Tab2(widget.cam)],
               ),
             ),
           ),

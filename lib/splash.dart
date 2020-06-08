@@ -99,7 +99,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
               type: PageTransitionType.rightToLeft,
               child: RootPage(
                 auth: Auth(),
-                cam:cam
+                cam:widget.cam,
               )));
     }
 //dispose();

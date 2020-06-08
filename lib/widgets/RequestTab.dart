@@ -31,10 +31,9 @@ class _RequestTabState extends State<RequestTab> {
   Widget build(BuildContext context) {
     uidg = widget.uid;
     return Column(
-      
       children: <Widget>[
         Expanded(
-                  child: StreamBuilder<QuerySnapshot>(
+          child: StreamBuilder<QuerySnapshot>(
             stream: _firestore
                 .collection('requests')
                 .orderBy('date', descending: true)
@@ -78,54 +77,55 @@ class _RequestTabState extends State<RequestTab> {
           ),
         ),
         Expanded(
-                  child: StreamBuilder<QuerySnapshot>(
-      stream: _firestore
-            .collection('requests_accepted')
-            .orderBy('time', descending: true)
-            .snapshots(),
-      builder: (context, snapshot) {
-          snapa = snapshot;
-          if (snapshot.data == null) {
-            return ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: 1,
-                itemBuilder: (context, index) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Center(
-                        child: Icon(Icons.error),
-                      ),
-                      Text("No Requests found!"),
-                    ],
-                  );
-                });
-          } else {
-            docs = snapshot.data.documents;
-            //docs_data = snapshot.data[];
+          child: StreamBuilder<QuerySnapshot>(
+            stream: _firestore
+                .collection('requests_accepted')
+                .orderBy('time', descending: true)
+                .snapshots(),
+            builder: (context, snapshot) {
+              snapa = snapshot;
+              if (snapshot.data == null) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Center(
+                            child: Icon(Icons.error),
+                          ),
+                          Text("No Requests found!"),
+                        ],
+                      );
+                    });
+              } else {
+                docs = snapshot.data.documents;
+                //docs_data = snapshot.data[];
 
-            /*List<Widget> requests = docs.map((doc) {
+                /*List<Widget> requests = docs.map((doc) {
       Requests(doc.data['latitude'], doc.data['longitude'], doc.data['img'],
       doc.data['date']);
     }).toList();*/
-            return ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: getItems1(context, docs).length,
-                itemBuilder: (context, index) {
-                  // String img = snapshot.data.hitsList[index].previewUrl;
-                  return getItems1(context, docs)[index];
-                });
-          }
-      },
-    ),
+                return ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: getItems1(context, docs).length,
+                    itemBuilder: (context, index) {
+                      // String img = snapshot.data.hitsList[index].previewUrl;
+                      return getItems1(context, docs)[index];
+                    });
+              }
+            },
+          ),
         ),
       ],
     );
   }
 }
+
 void _settingModalBottomSheet1(
   context,
   doc,
@@ -362,7 +362,8 @@ List<Widget> getItems1(BuildContext context, List<DocumentSnapshot> docs) {
                         ),
                         FittedBox(
                           child: Text(
-                            "Date :   " + date.substring(0,(date.indexOf(' '))),
+                            "Date :   " +
+                                date.substring(0, (date.indexOf(' '))),
                             style: TextStyle(
                               fontFamily: 'Lato',
                               fontSize: 15,
@@ -438,6 +439,7 @@ List<Widget> getItems1(BuildContext context, List<DocumentSnapshot> docs) {
         : Container();
   }).toList();
 }
+
 Future<Widget> _getImage(BuildContext context, String img) async {
   //String img;
   Image m;

@@ -96,11 +96,11 @@ class DisplayPictureScreen extends StatelessWidget {
         FirebaseStorage.instance.ref().child("Images/$name");
     StorageUploadTask uploadTask = storagereference.putFile(File(imagePath));
     await uploadTask.onComplete;
-    var url = storagereference.getDownloadURL();
+    var url = await storagereference.getDownloadURL();
     img_url = url.toString();
     _firestore.collection('requests_completed').add({
       'img_url': img_url,
-      'uid':uid,
+      'uid': uid,
     });
   }
 
