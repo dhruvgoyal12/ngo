@@ -175,7 +175,7 @@ class detailed_view2 extends StatelessWidget {
                 color: Colors.black,
                 text: 'Completed',
                 onPressed: () {
-                   _settingModalBottomSheet(context, document.data['uid'], cam);
+                   _settingModalBottomSheet(context, document.data['uid'], cam, document);
 //                   document.reference.delete();
 //                   Navigator.pop(context);
                 },
@@ -222,7 +222,7 @@ class detailed_view2 extends StatelessWidget {
     ));
   }
 }
-void _settingModalBottomSheet(context, s, cam) {
+void _settingModalBottomSheet(context, s, cam, document) {
   int count;
   //DocumentSnapshot documents = document;
   showModalBottomSheet(
@@ -274,7 +274,7 @@ void _settingModalBottomSheet(context, s, cam) {
                     //borderRadius: BorderRadius.circular(32.0),
                     child: MaterialButton(
                       onPressed: () {
-                        //document.reference.delete();
+                        document.reference.delete();
                         count = 0;
                         Navigator.popUntil(context, (route) {
                           return count++ == 2;
