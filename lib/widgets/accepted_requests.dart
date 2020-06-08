@@ -216,7 +216,47 @@ List<Widget> getItems(
                                                               color:
                                                                   Colors.white,
                                                             )),
-                                                        onPressed: () {
+                                                        onPressed: () async{
+                                                           StorageReference photoRef =
+                                      await FirebaseStorage.instance
+                                          .getReferenceFromUrl(img);
+                                  photoRef.delete().catchError((e) {});
+                                  _firestore
+                                      .collection('requests_completed')
+                                      .document(doc.documentID.toString())
+                                      .delete()
+                                      .then((_) {
+                                    Fluttertoast.showToast(
+                                      msg: 'Request deleted',
+                                      gravity: ToastGravity.TOP,
+                                      toastLength: Toast.LENGTH_SHORT,
+                                    );
+                                    
+                                  }).catchError((e) {
+                                    Fluttertoast.showToast(
+                                      msg: 'Error deleting request',
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.TOP,
+                                    );
+                                  });
+                                  _firestore
+                                      .collection('requests_accepted')
+                                      .document(doc.documentID.toString())
+                                      .delete()
+                                      .then((_) {
+                                    Fluttertoast.showToast(
+                                      msg: 'Request deleted',
+                                      gravity: ToastGravity.TOP,
+                                      toastLength: Toast.LENGTH_SHORT,
+                                    );
+                                    
+                                  }).catchError((e) {
+                                    Fluttertoast.showToast(
+                                      msg: 'Error deleting request',
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.TOP,
+                                    );
+                                  });
                                                           Navigator.pop(
                                                               context);
                                                           closeRequest(op);
