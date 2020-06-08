@@ -215,57 +215,76 @@ class _tabState extends State<tab> {
                           ],
                         ),
                         onTap: () async {
-                          try {
-                            updateC1();
-                            QuerySnapshot req = await _firestore
-                                .collection('requests_accepted')
-                                .getDocuments();
-                            for (var us in req.documents) {
-                              if (widget.loggedinUser.email ==
-                                  us.data['accepted_by']) {
-                                _firestore.collection('requests').add({
-                                  'img_url': us.data['img_url'],
-                                  'city': us.data['city'],
-                                  'address': us.data['address'],
-                                  'note': us.data['note'],
-                                  'time': us.data['time'],
-                                  'submitted_by': us.data['submitted_by'],
-                                  'submitter_phone_no':
-                                      us.data['submitter_phone_no'],
-                                  'category': us.data['category'],
-                                });
-                                us.reference.delete();
-                              }
-                            }
 
-                            final QuerySnapshot result = await _firestore
-                                .collection('categories')
-                                .where('sender',
-                                    isEqualTo: widget.loggedinUser.email
-                                        .toString()
-                                        .toLowerCase())
-                                .limit(1)
-                                .getDocuments();
-                            final List<DocumentSnapshot> documents =
-                                result.documents;
-                            print(documents);
-                            String id;
-                            for (var r in documents) {
-                              id = r.documentID;
-                              print('haha');
-                            }
 
-                            await _firestore
-                                .collection('categories')
-                                .document(id)
-                                .delete();
+    var alertDialog = AlertDialog(
+    titleTextStyle: TextStyle(
+    color: Colors.white,
+    fontSize: 30,
+    fontWeight: FontWeight.w500),
+    title: Text('Are you Sure?'),
+    content: Text(
+    'You will lose access to your account',
+    style: TextStyle(
+    color: Colors.grey,
+    fontSize: 20,
+    fontWeight: FontWeight.w800),
+    ),
+    actions: <Widget>[
+    FlatButton(
+    child: Text('Delete'),
+    onPressed: () async{
+    try {
+    updateC1();
+    QuerySnapshot req = await _firestore
+        .collection('requests_accepted')
+        .getDocuments();
+    for (var us in req.documents) {
+    if (widget.loggedinUser.email ==
+    us.data['accepted_by']) {
+    _firestore.collection('requests').add({
+    'img_url': us.data['img_url'],
+    'city': us.data['city'],
+    'address': us.data['address'],
+    'note': us.data['note'],
+    'time': us.data['time'],
+    'submitted_by': us.data['submitted_by'],
+    'submitter_phone_no':
+    us.data['submitter_phone_no'],
+    'category': us.data['category'],
+    });
+    us.reference.delete();
+    }
+    }
 
-                            await widget.loggedinUser.delete();
+    final QuerySnapshot result = await _firestore
+        .collection('categories')
+        .where('sender',
+    isEqualTo: widget.loggedinUser.email
+        .toString()
+        .toLowerCase())
+        .limit(1)
+        .getDocuments();
+    final List<DocumentSnapshot> documents =
+    result.documents;
+    print(documents);
+    String id;
+    for (var r in documents) {
+    id = r.documentID;
+    print('haha');
+    }
 
-           
-                             Navigator.pushReplacementNamed(context, '/wel');
-                          } catch (e) {
-                            print(e);
+    await _firestore
+        .collection('categories')
+        .document(id)
+        .delete();
+
+    await widget.loggedinUser.delete();
+
+
+    Navigator.pushReplacementNamed(context, '/wel');
+    } catch (e) {
+    print(e);
 //                    var alertDialog = AlertUser(
 //                      title: 'Oops!',
 //                      content:
@@ -277,7 +296,90 @@ class _tabState extends State<tab> {
 //                        builder: (context) {
 //                          return alertDialog;
 //                        });
-                          }
+    }
+    },
+    ),
+    FlatButton(
+    child: Text('Back'),
+    onPressed: () {
+    Navigator.pop(
+    context,
+    );
+    },
+    ),
+    ],
+    shape: RoundedRectangleBorder(),
+    backgroundColor: Colors.transparent,
+    );
+    showDialog(
+    context: (context),
+    builder: (context) {
+    return alertDialog;
+    });
+
+
+//                            updateC1();
+//                            QuerySnapshot req = await _firestore
+//                                .collection('requests_accepted')
+//                                .getDocuments();
+//                            for (var us in req.documents) {
+//                              if (widget.loggedinUser.email ==
+//                                  us.data['accepted_by']) {
+//                                _firestore.collection('requests').add({
+//                                  'img_url': us.data['img_url'],
+//                                  'city': us.data['city'],
+//                                  'address': us.data['address'],
+//                                  'note': us.data['note'],
+//                                  'time': us.data['time'],
+//                                  'submitted_by': us.data['submitted_by'],
+//                                  'submitter_phone_no':
+//                                      us.data['submitter_phone_no'],
+//                                  'category': us.data['category'],
+//                                });
+//                                us.reference.delete();
+//                              }
+//                            }
+//
+//                            final QuerySnapshot result = await _firestore
+//                                .collection('categories')
+//                                .where('sender',
+//                                    isEqualTo: widget.loggedinUser.email
+//                                        .toString()
+//                                        .toLowerCase())
+//                                .limit(1)
+//                                .getDocuments();
+//                            final List<DocumentSnapshot> documents =
+//                                result.documents;
+//                            print(documents);
+//                            String id;
+//                            for (var r in documents) {
+//                              id = r.documentID;
+//                              print('haha');
+//                            }
+//
+//                            await _firestore
+//                                .collection('categories')
+//                                .document(id)
+//                                .delete();
+//
+//                            await widget.loggedinUser.delete();
+//
+//
+//                             Navigator.pushReplacementNamed(context, '/wel');
+//                          } catch (e) {
+//                            print(e);
+////                    var alertDialog = AlertUser(
+////                      title: 'Oops!',
+////                      content:
+////                          'We cannot reach our servers right now. Please check your internet connection',
+////                      btnText: 'Back',
+////                    );
+////                    showDialog(
+////                        context: (context),
+////                        builder: (context) {
+////                          return alertDialog;
+////                        });
+//                          }
                         },
                       ),
                     ],
@@ -351,3 +453,5 @@ class _tabState extends State<tab> {
     );
   }
 }
+
+
